@@ -3,7 +3,16 @@ import { default as faker } from 'faker';
 // eigen imports
 import { ILogger } from "../logging";
 import { IConfig } from "../Config";
-import { IMessage, Message, IUser, User, Post, IPost } from '../../models/mongoose';
+import { 
+	IMessage, 
+	Message, 
+	IUser, 
+	User, 
+	Post, 
+	IPost,
+	IEvent,
+	Event, 
+} from '../../models/mongoose';
 
 class MongoDBDatabase {
 	private config: IConfig;
@@ -12,6 +21,7 @@ class MongoDBDatabase {
 
 	private users: Array <IUser>;
 	private posts: Array <IPost>;
+	private events: Array <IEvent>;
 
 	constructor (logger: ILogger, config: IConfig) {
 		this.logger = logger;
@@ -19,6 +29,7 @@ class MongoDBDatabase {
 		
 		this.posts = [];
 		this.users = [];
+		this.events = [];
 		
 	};
 
@@ -170,6 +181,73 @@ class MongoDBDatabase {
 
 		await Promise.all(promises)
 	};
+
+	private eventCreate = async (
+		title: string,
+		description: string,
+		location: string,
+		city: string,
+		street: string,
+		houseNumber: number,
+		tags: string,
+		category: string,
+		picture: string,
+		duration: number,
+		price: number,
+		date: number,
+		venue: string,
+		) => {
+			const eventDetail = {
+				title,
+				description,
+				location,
+				city,
+				street,
+				houseNumber,
+				tags,
+				category,
+				picture,
+				duration,
+				price,
+				date,
+				venue,
+		};
+
+		const event: IEvent = new Event(eventDetail);
+
+		try {
+			const createdEvent = await event.save();
+			this.events.push(createdEvent);
+
+			this.logger.info(`Event created with id: ${createdEvent._id}.`, {});
+		} catch (err) {
+			this.logger.error(`An error occurred when creating an event ${err}!`, {err});
+		}
+	};
+
+	private createEvents = async () => {
+		const promises = [];
+
+			for (let i = 0; i < 30; i++) {
+				promises.push(this.eventCreate(
+					faker.lorem.sentence(10),
+					faker.lorem.paragraph(30),
+					faker.address.city(),
+					faker.address.city(),
+					faker.address.streetName(),
+					faker.random.number(1000),
+					faker.random.words(),
+					'Music',
+					faker.random.image(),
+					faker.random.number(1000),
+					faker.random.number(1000),
+					faker.date.future(),
+					faker.lorem.word(),
+			));
+		}
+
+		await Promise.all(promises)
+	};
 	
 
 	
@@ -195,6 +273,12 @@ class MongoDBDatabase {
 				await this.createPosts();
 			}
 			return Post.find().exec()	
+		});
+		this.events = await Event.estimatedDocumentCount().exec().then(async (count) => {
+			if (count === 0) {
+				await this.createEvents();
+			}
+			return Event.find().exec()	
 		});
 	};
 }
