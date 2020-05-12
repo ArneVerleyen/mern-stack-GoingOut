@@ -3,6 +3,7 @@ import PostController from './PostController';
 import MessageController from './MessageController';
 import UserController from './UserController';
 import EventController from './EventController';
+import VenueController from './VenueController';
 
 
 export {
@@ -11,4 +12,5 @@ export {
 	MessageController,
 	UserController,
 	EventController,
+	VenueController,
 };

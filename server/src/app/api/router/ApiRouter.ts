@@ -15,6 +15,7 @@ import {
 	MessageController,
 	UserController,
 	EventController,
+	VenueController,
 } from '../controllers';
 
 class ApiRouter {
@@ -24,6 +25,7 @@ class ApiRouter {
 	private messageController: MessageController;
 	private userController: UserController;
 	private eventController: EventController;
+	private venueController: VenueController;
 
   constructor() {
     this.router = express.Router();
@@ -39,6 +41,7 @@ class ApiRouter {
 		this.messageController = new MessageController();
 		this.userController = new UserController();
 		this.eventController = new EventController();
+		this.venueController = new VenueController();
   }
 
   private registerRoutes(): void {
@@ -54,8 +57,8 @@ class ApiRouter {
 		this.router.get('/users/:id', this.userController.show);
 		this.router.get('/events', this.eventController.index);
 		this.router.get('/events/:id', this.eventController.show);
-
-		
+		this.router.get('/venues', this.venueController.index);
+		this.router.get('/venues/:id', this.venueController.show);
   }
 }
 

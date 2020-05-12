@@ -72,7 +72,7 @@ const eventSchema: Schema = new Schema (
 			required: true,
 		},
 		date: {
-			type: Number,
+			type: Date,
 			required: true,
 		},
 		_createdAt: { 

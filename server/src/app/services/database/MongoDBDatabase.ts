@@ -11,7 +11,9 @@ import {
 	Post, 
 	IPost,
 	IEvent,
-	Event, 
+	Event,
+	Venue,
+	IVenue, 
 } from '../../models/mongoose';
 
 class MongoDBDatabase {
@@ -22,6 +24,7 @@ class MongoDBDatabase {
 	private users: Array <IUser>;
 	private posts: Array <IPost>;
 	private events: Array <IEvent>;
+	private venues: Array <IVenue>;
 
 	constructor (logger: ILogger, config: IConfig) {
 		this.logger = logger;
@@ -30,6 +33,7 @@ class MongoDBDatabase {
 		this.posts = [];
 		this.users = [];
 		this.events = [];
+		this.venues = [];
 		
 	};
 
@@ -249,6 +253,49 @@ class MongoDBDatabase {
 		await Promise.all(promises)
 	};
 	
+	private venueCreate = async (
+		name: string,
+		description: string,
+		city: string,
+		street: string,
+		houseNumber: number,
+		) => {
+			const venueDetail = {
+				name,
+				description,
+				city,
+				street,
+				houseNumber,
+		};
+
+		const venue: IVenue = new Venue(venueDetail);
+
+		try {
+			const createdVenue = await venue.save();
+			this.venues.push(createdVenue);
+
+			this.logger.info(`Venue created with id: ${createdVenue._id}.`, {});
+		} catch (err) {
+			this.logger.error(`An error occurred when creating a venue ${err}!`, {err});
+		}
+	};
+
+	private createVenues = async () => {
+		const promises = [];
+
+			for (let i = 0; i < 30; i++) {
+				promises.push(this.venueCreate(
+					faker.lorem.word(),
+					faker.lorem.paragraph(),
+					faker.address.city(),
+					faker.address.streetName(),
+					faker.random.number(999),
+				)
+			);
+		}
+
+		await Promise.all(promises)
+	};
 
 	
 
@@ -279,6 +326,12 @@ class MongoDBDatabase {
 				await this.createEvents();
 			}
 			return Event.find().exec()	
+		});
+		this.venues = await Venue.estimatedDocumentCount().exec().then(async (count) => {
+			if (count === 0) {
+				await this.createVenues();
+			}
+			return Venue.find().exec()	
 		});
 	};
 }
