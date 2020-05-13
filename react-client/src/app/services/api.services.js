@@ -1,13 +1,21 @@
 import { default as React, useEffect, useState, useContext, createContext } from 'react';
 
 const ApiContext = createContext();
-const useApi = () => useContext(Apicontext());
+const useApi = () => useContext(ApiContext);
 
 const ApiProvider = ({children}) => {
+	const BASE_URL = 'http://localhost:8080/api'; //http://localhost:8080/api/posts http://localhost:8080/
+
+	const findAllPosts = async () => {
+		let url = `${BASE_URL}/posts`;
+		const response = await fetch(url);
+		return response.json();
+	};
+
 	return (
-		<ApiContext.Consumer value={{}}>
+		<ApiContext.Provider value={{ findAllPosts }}>
 			{children}
-		</ApiContext.Consumer>
+		</ApiContext.Provider>
 	);
 };
 
