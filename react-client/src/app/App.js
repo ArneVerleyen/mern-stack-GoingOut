@@ -8,6 +8,7 @@ import {
 	ContactPage,
 	HomePage,
 	SignInPage,
+	PostDetailPage,
 } from './pages';
 // Meer eigen imports 
 import { RouteWithLayout } from './utilities';
@@ -26,10 +27,11 @@ function App() {
 			<ApiProvider>
 				<Router basename='/'>
 					<Switch>
-						<RouteWithLayout exact path={Routes.LANDING} component={HomePage} layout={PageLayOut} />
+						<RouteWithLayout exact path= {Routes.LANDING} component={HomePage} layout={PageLayOut} />
 						<Redirect exact path = {Routes.HOME} to = {Routes.LANDING} />
-						<RouteWithLayout exact path ={Routes.CONTACT} component={ContactPage} layout={PageLayOut} />
-						<RouteWithLayout exact path ={Routes.AUTH_SIGN_IN} component={SignInPage}  />
+						<RouteWithLayout exact path = {Routes.CONTACT} component={ContactPage} layout={PageLayOut} />
+						<RouteWithLayout exact path = {Routes.AUTH_SIGN_IN} component={SignInPage}  />
+						<RouteWithLayout exact path = {Routes.POST_DETAIL} component={PostDetailPage} layout={PageLayOut} />
 					</Switch>
 				</Router>
 			</ApiProvider>

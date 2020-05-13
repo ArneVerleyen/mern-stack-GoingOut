@@ -12,8 +12,14 @@ const ApiProvider = ({children}) => {
 		return response.json();
 	};
 
+	const findPost = async (postId) => {
+		let url = `${BASE_URL}/posts/${postId}`;
+		const response = await fetch(url);
+		return response.json();
+	};
+
 	return (
-		<ApiContext.Provider value={{ findAllPosts }}>
+		<ApiContext.Provider value={{ findAllPosts, findPost }}>
 			{children}
 		</ApiContext.Provider>
 	);

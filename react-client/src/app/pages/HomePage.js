@@ -1,27 +1,18 @@
 import { default as React, useState, useEffect, useCallback } from 'react';
-import { useApi } from '../services';
+import { useHistory } from 'react-router-dom';
+import * as Routes from '../routes';
+
+import { PostList } from '../components';
 
 const HomePage = ({children}) => {
-	const { findAllPosts } = useApi();
-	const [ posts, setPosts ] = useState();
-
-	useEffect(() => {
-		const fetchPosts = async () => {
-			const data = await findAllPosts();
-			console.log(data);
-			setPosts(data);
-		}
-		fetchPosts();
-	}, []);
+	const history = useHistory();
+	const handlePostReadMore = (postId) => {
+		history.push(`${Routes.POST_DETAIL.replace(':id',postId)}`);
+	};
 
 	return (
 	<div className="post-list">
-		{posts && posts.map((post, index) => (
-				<article key={post._id}>
-					<h1>{post.title}</h1>
-					<div>{post.synopsis}</div>
-				</article>
-		))}
+		<PostList onReadMore={handlePostReadMore} />
 	</div>
 	);
 };
