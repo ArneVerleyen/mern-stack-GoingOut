@@ -5,15 +5,9 @@ import * as Routes from '../routes';
 import { PostList } from '../components';
 
 const HomePage = ({children}) => {
-	const history = useHistory();
-	const handlePostReadMore = (postId) => {
-		history.push(`${Routes.POST_DETAIL.replace(':id',postId)}`);
-	};
 
 	return (
-	<div className="post-list">
-		<PostList onReadMore={handlePostReadMore} />
-	</div>
+		<p>HOMEPAGE</p>
 	);
 };
 

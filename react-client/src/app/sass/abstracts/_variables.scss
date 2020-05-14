@@ -1,0 +1,77 @@
+$color-yellow: #F7BF0F;
+$color-darker-yellow: #F6A60F;
+$color-light-orange: #F2812A;
+$color-orange: #F76A11;
+$color-brown: #96400D;
+$color-white: #f1f1f1;
+$color-black: #222;
+
+$palette-black: (
+	100: lighten($color-black, 15%),
+	200: lighten($color-black, 10%),
+	300: lighten($color-black, 5%),
+	400: $color-black,
+	500: darken($color-black, 5%),
+	600: darken($color-black, 10%),
+	700: darken($color-black, 15%)
+);
+
+$palette-yellow: (
+	100: lighten($color-yellow, 15%),
+	200: lighten($color-yellow, 10%),
+	300: lighten($color-yellow, 5%),
+	400: $color-yellow,
+	500: darken($color-yellow, 5%),
+	600: darken($color-yellow, 10%),
+	700: darken($color-yellow, 15%)
+);
+
+$palette-darker-yellow: (
+	100: lighten($color-darker-yellow, 15%),
+	200: lighten($color-darker-yellow, 10%),
+	300: lighten($color-darker-yellow, 5%),
+	400: $color-darker-yellow,
+	500: darken($color-darker-yellow, 5%),
+	600: darken($color-darker-yellow, 10%),
+	700: darken($color-darker-yellow, 15%)
+);
+
+$palette-light-orange: (
+	100: lighten($color-light-orange, 15%),
+	200: lighten($color-light-orange, 10%),
+	300: lighten($color-light-orange, 5%),
+	400: $color-light-orange,
+	500: darken($color-light-orange, 5%),
+	600: darken($color-light-orange, 10%),
+	700: darken($color-light-orange, 15%)
+);
+
+$palette-orange: (
+	100: lighten($color-orange, 15%),
+	200: lighten($color-orange, 10%),
+	300: lighten($color-orange, 5%),
+	400: $color-orange,
+	500: darken($color-orange, 5%),
+	600: darken($color-orange, 10%),
+	700: darken($color-orange, 15%)
+);
+
+$palette-brown: (
+	100: lighten($color-brown, 15%),
+	200: lighten($color-brown, 10%),
+	300: lighten($color-brown, 5%),
+	400: $color-brown,
+	500: darken($color-brown, 5%),
+	600: darken($color-brown, 10%),
+	700: darken($color-brown, 15%)
+);
+
+$palette-white: (
+	100: lighten($color-white, 15%),
+	200: lighten($color-white, 10%),
+	300: lighten($color-white, 5%),
+	400: $color-white,
+	500: darken($color-white, 5%),
+	600: darken($color-white, 10%),
+	700: darken($color-white, 15%)
+);

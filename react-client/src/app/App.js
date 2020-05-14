@@ -9,6 +9,7 @@ import {
 	HomePage,
 	SignInPage,
 	PostDetailPage,
+	PostPage,
 } from './pages';
 // Meer eigen imports 
 import { RouteWithLayout } from './utilities';
@@ -18,7 +19,7 @@ import * as Routes from './routes';
 import { ApiProvider } from './services';
 
 // Css import
-import './App.css';
+import '../app/app.scss';
 
 // App
 function App() {
@@ -31,6 +32,7 @@ function App() {
 						<Redirect exact path = {Routes.HOME} to = {Routes.LANDING} />
 						<RouteWithLayout exact path = {Routes.CONTACT} component={ContactPage} layout={PageLayOut} />
 						<RouteWithLayout exact path = {Routes.AUTH_SIGN_IN} component={SignInPage}  />
+						<RouteWithLayout exact path = {Routes.POST_PAGE} component={PostPage} layout={PageLayOut} />
 						<RouteWithLayout exact path = {Routes.POST_DETAIL} component={PostDetailPage} layout={PageLayOut} />
 					</Switch>
 				</Router>
