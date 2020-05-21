@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="494" height="87" viewBox="0 0 494 87">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        font-size: 64px;
+        font-family: BookmanOldStyle, Bookman Old Style;
+      }
+
+      .cls-2, .cls-4 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke: #fff;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_15" data-name="Group 15" transform="translate(-29 -22)">
+    <text id="Going_Out_" data-name="Going Out?" class="cls-1" transform="translate(47 25)"><tspan x="0" y="60">Going Out?</tspan></text>
+    <g id="Rectangle_2" data-name="Rectangle 2" class="cls-2" transform="translate(29 22)">
+      <rect class="cls-3" width="394" height="87"/>
+      <rect class="cls-4" x="0.5" y="0.5" width="393" height="86"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,26 @@
+@import '../app.scss';
+
+.contact-container{
+	margin-left: 30%;
+	padding: 10% 0 10% 0;
+	h1{
+		font-family: $font-bookman;
+		color: $color-yellow;
+		font-size: 24px;
+	}
+	h3{
+		font-family: $font-bookman;
+		color: $color-yellow;
+		font-size: 20px;
+	}
+	div{
+		padding-left: 12px;
+		p{
+			font-family: $font-bookman;
+			color: $color-yellow;
+			font-size: 20px;
+			padding: 25px 0 0 10px;
+		
+		}
+	}
+}

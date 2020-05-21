@@ -1,0 +1,26 @@
+@import '../../app.scss';
+
+.event-container{
+	padding: 60px;
+
+	.event-deatail{
+		padding-right: 20px;
+	}
+	.event-title{
+		font-family: $font-bookman;
+		color: $color-yellow;
+		font-size: 24px;
+	}
+	p{
+		font-family: $font-roboto;
+		font-size: 16px;
+		color: $color-orange;
+	}
+
+
+	.event-img{
+		margin-top:30px;
+		max-width: 400px;
+		height:auto;
+	}
+}

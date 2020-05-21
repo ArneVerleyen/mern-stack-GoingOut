@@ -8,8 +8,13 @@ import {
 	ContactPage,
 	HomePage,
 	SignInPage,
-	PostDetailPage,
-	PostPage,
+	
+	EventDetailPage,
+	EventPagePaged,
+	EventPage,
+
+	VenuePage,
+	VenueDetailPage,
 } from './pages';
 // Meer eigen imports 
 import { RouteWithLayout } from './utilities';
@@ -20,6 +25,8 @@ import { ApiProvider } from './services';
 
 // Css import
 import '../app/app.scss';
+import PageLayout from './layout/PageLayOut';
+
 
 // App
 function App() {
@@ -32,8 +39,13 @@ function App() {
 						<Redirect exact path = {Routes.HOME} to = {Routes.LANDING} />
 						<RouteWithLayout exact path = {Routes.CONTACT} component={ContactPage} layout={PageLayOut} />
 						<RouteWithLayout exact path = {Routes.AUTH_SIGN_IN} component={SignInPage}  />
-						<RouteWithLayout exact path = {Routes.POST_PAGE} component={PostPage} layout={PageLayOut} />
-						<RouteWithLayout exact path = {Routes.POST_DETAIL} component={PostDetailPage} layout={PageLayOut} />
+
+						<RouteWithLayout exact path = {Routes.EVENT_PAGE} component={EventPagePaged} layout={PageLayOut} />
+						<RouteWithLayout exact path = {Routes.EVENT_DETAIL} component={EventDetailPage} layout={PageLayOut} />
+						<RouteWithLayout exact path = {Routes.EVENT_ALL} component={EventPage} layout={PageLayOut} />
+						
+						<RouteWithLayout exact path = {Routes.VENUE_PAGE} component={VenuePage} layout={PageLayOut} />
+						<RouteWithLayout exact path = {Routes.VENUE_DETAIL} component={VenueDetailPage} layout={PageLayOut} />
 					</Switch>
 				</Router>
 			</ApiProvider>
@@ -42,3 +54,5 @@ function App() {
 }
 
 export default App;
+
+

@@ -1,0 +1,45 @@
+@import '../../app.scss';
+
+.nav-container{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	
+}
+
+.nav-logo{
+	padding: 20px;
+}
+
+.nav-item-container{
+	display: flex;
+	
+	.nav-item{
+		padding: 10px 30px 10px 10px;
+	
+		text-decoration: none;
+		font-family: $font-bookman;
+		color: $color-white;
+		font-size: 16px;
+	}
+	.nav-toggle{
+		display: none;
+
+	}
+
+}
+
+
+
+@media screen and (max-width: 800px) {
+	.nav-logo{
+		width: 250px;
+		height: auto;
+	}
+	
+	.hidden{
+		display: none;
+	}
+}
+
+

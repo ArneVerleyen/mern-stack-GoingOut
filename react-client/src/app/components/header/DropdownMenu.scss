@@ -1,0 +1,48 @@
+@import '../../app.scss';
+.dropdown-container{
+	display: none;
+}
+
+
+@media screen and (max-width: 800px){
+
+	.nav-toggle{
+		display: block;
+		text-decoration: none;
+		border: none;
+		background-color: $color-yellow;
+		padding-right: 10px;
+		position: relative;
+		right: 20px;
+		top: 20px;
+		img{
+			width: 30px;
+			height: auto;
+		}
+	}
+
+	.dropdown-container{
+		display: block;
+	}
+
+	.dropped-container{
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		padding-top: 60px;
+		
+		
+		
+		.nav-item-dropdown{
+			margin: 10px 30px 10px 10px;
+			text-decoration: none;
+			font-family: $font-bookman;
+			color: $color-white;
+			font-size: 16px;
+			
+		}
+		.nav-item-dropdown:hover{
+			border-bottom: 1px solid $color-white;
+		}
+	}
+}

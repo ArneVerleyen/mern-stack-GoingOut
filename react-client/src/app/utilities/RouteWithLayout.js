@@ -1,4 +1,3 @@
-
 import { default as React } from 'react';
 import { Route as ReactRoute } from 'react-router';
 

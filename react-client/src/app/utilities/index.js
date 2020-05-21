@@ -1,6 +1,7 @@
-import { default as RouteWithLayout } from './RouteWithLayout';
+import AuthRouteWithLayout from './AuthRouteWithLayout';
+import RouteWithLayout from './RouteWithLayout';
 
 export {
-	RouteWithLayout,
-	
+  AuthRouteWithLayout,
+  RouteWithLayout,
 }
