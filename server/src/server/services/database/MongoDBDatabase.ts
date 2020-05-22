@@ -12,6 +12,8 @@ import {
 	Event,
 	IVenue,
 	Venue,
+	IAgenda,
+	Agenda
 } from '../../models/mongoose';
 
 class MongoDBDatabase {
@@ -26,6 +28,7 @@ class MongoDBDatabase {
 	// eigen seeders
 	private events: Array <IEvent>;
 	private venues: Array <IVenue>;
+	private agendas: Array<IAgenda>;
 
 
   constructor(logger: ILogger, config: IConfig) {
@@ -40,6 +43,7 @@ class MongoDBDatabase {
 		// eigen arrays
 		this.venues = [];
 		this.events = [];
+		this.agendas = [];
 
   }
 
@@ -204,6 +208,17 @@ class MongoDBDatabase {
     return arrayOfIds;
 	}
 	*/
+	private getRandomEvents = () => {
+		for (let i = 0; i<10; i++){
+			let event: IEvent = null;
+			if (this.events && this.events.length > 0) {
+				event = this.events[
+					Math.floor(Math.random() * this.users.length)
+				];
+			}
+			return event;
+		}
+  };
 
 	private getRandomUser = () => {
     let user: IUser = null;
@@ -340,8 +355,28 @@ class MongoDBDatabase {
 
 		await Promise.all(promises)
 	};
-	
+
+	private agendaCreate = async (
+		
+		
+	) => {
+		const agendaDetail = {
+			storedEvents: this.getRandomEvents(),
+			_userId: this.getRandomUser()._id,
+		}
+		const agenda: IAgenda = new Agenda(agendaDetail)
+
+		try {
+			const createdAgenda = await agenda.save();
+			this.agendas.push(createdAgenda);
+
+			this.logger.info(`Agenda created with id: ${createdAgenda._id}.`, {});
+		} catch (err) {
+			this.logger.error(`An error occurred when creating an agenda ${err}!`, {err});
+		}
+	};
 	// Alle seeders aanspreken indien nodig.
+
 
   public seed = async () => {
     this.users = await User.estimatedDocumentCount()
@@ -373,6 +408,13 @@ class MongoDBDatabase {
 			}
 			return Event.find().exec()	
 		});
+		this.agendas = await Agenda.estimatedDocumentCount().exec().then(async (count) => {
+			if (count === 0) {
+				await this.createAgenda();
+			}
+			return Event.find().exec()	
+		});
+		
 
   };
 }

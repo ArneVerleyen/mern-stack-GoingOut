@@ -11,6 +11,7 @@ import {
 	UserController,
 	EventController,
 	VenueController,
+	CategoryController,
 } from '../controllers';
 
 class ApiRouter {
@@ -22,6 +23,7 @@ class ApiRouter {
 
 	private eventController: EventController;
 	private venueController: VenueController;
+	private categoryController: CategoryController;
 
 	// config / Authentication service
 
@@ -44,6 +46,7 @@ class ApiRouter {
 		
 		this.venueController = new VenueController();
 		this.eventController = new EventController();
+		this.categoryController = new CategoryController();
   }
 
   private registerRoutes(): void {
@@ -79,7 +82,21 @@ class ApiRouter {
 		this.router.post('/venues', this.venueController.store);
     this.router.get('/venues/:id/edit', this.venueController.edit);
     this.router.put('/venues/:id/update', this.venueController.update);
-    this.router.delete('/venues/:id/destroy', this.venueController.destroy);
+		this.router.delete('/venues/:id/destroy', this.venueController.destroy);
+		
+		/*
+		 * Category Routes
+		 */
+
+		this.router.get('/categories', this.categoryController.index);
+		this.router.get('/categories/create', this.categoryController.create);
+		this.router.get('/categories/:id', this.categoryController.show);
+		this.router.post('/categories', this.categoryController.store);
+    this.router.get('/categories/:id/edit', this.categoryController.edit);
+    this.router.put('/categories/:id/update', this.categoryController.update);
+		this.router.delete('/categories/:id/destroy', this.categoryController.destroy);
+
+
   }
 }
 

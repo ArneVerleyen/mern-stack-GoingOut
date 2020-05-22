@@ -1,5 +1,7 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import mongoose, { Schema, Document, PaginateModel } from 'mongoose';
 import { default as slug } from 'slug';
+import { default as mongoosePaginate } from 'mongoose-paginate';
+
 
 interface ICategory extends Document {
   name: string;
@@ -12,7 +14,7 @@ interface ICategory extends Document {
   slugify(): void;
 }
 
-interface ICategoryModel extends Model<ICategory> {}
+interface ICategoryModel extends PaginateModel<ICategory> {}
 
 const CategorySchema: Schema = new Schema(
   {
@@ -21,7 +23,13 @@ const CategorySchema: Schema = new Schema(
     description: { type: String, required: false, max: 1024 },
     _createdAt: { type: Number, required: true, default: Date.now() },
     _modifiedAt: { type: Number, required: false, default: null },
-    _deletedAt: { type: Number, required: false, default: null },
+		_deletedAt: { type: Number, required: false, default: null },
+		
+		/*_eventIds: {
+			type: [Schema.Types.ObjectId],
+			ref: 'Event',
+
+		}*/
   },
   {
     toJSON: { virtuals: true },
@@ -40,9 +48,10 @@ CategorySchema.pre<ICategory>('validate', function(next) {
   return next();
 });
 
+CategorySchema.plugin(mongoosePaginate);
 const Category = mongoose.model<ICategory, ICategoryModel>(
   'Category',
   CategorySchema,
 );
 
-export { ICategory, Category };
+export { ICategory, Category, CategorySchema };

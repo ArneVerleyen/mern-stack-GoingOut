@@ -16,16 +16,23 @@ import {
 	VenuePage,
 	VenueDetailPage,
 } from './pages';
+
+// admin imports
+
+import {
+	AdminPage,
+} from './admin/pages'
+
 // Meer eigen imports 
 import { RouteWithLayout } from './utilities';
-import { PageLayOut } from './layout';
+import { PageLayOut, BackofficeLayout } from './layout';
 import * as Routes from './routes';
 
 import { ApiProvider } from './services';
 
 // Css import
 import '../app/app.scss';
-import PageLayout from './layout/PageLayOut';
+
 
 
 // App
@@ -46,6 +53,8 @@ function App() {
 						
 						<RouteWithLayout exact path = {Routes.VENUE_PAGE} component={VenuePage} layout={PageLayOut} />
 						<RouteWithLayout exact path = {Routes.VENUE_DETAIL} component={VenueDetailPage} layout={PageLayOut} />
+
+						<RouteWithLayout path = {Routes.BACKOFFICE_LANDING} component={AdminPage} layout={BackofficeLayout} />
 					</Switch>
 				</Router>
 			</ApiProvider>

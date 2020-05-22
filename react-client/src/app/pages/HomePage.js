@@ -26,7 +26,7 @@ const HomePage = ({children}) => {
 		<div className="home-page">
 			<div className="header-container">
 				<img src={Header} alt="header"></img>
-				<a href="#body-content"><i class="home-pijl fas fa-arrow-down"></i></a>
+				<a href="#body-content"><i className="home-pijl fas fa-arrow-down"></i></a>
 			</div>
 			<div id="body-content">
 				<Link className="page-title" to={Routes.EVENT_PAGE}>Events</Link>
