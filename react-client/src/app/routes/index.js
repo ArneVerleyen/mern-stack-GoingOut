@@ -18,3 +18,4 @@ export const VENUE_DETAIL = '/venues/:id';
 export const BACKOFFICE_LANDING = '/admin/';
 export const BACKOFFICE_DASHBOARD = '/admin/dashboard';
 export const BACKOFFICE_EVENTS = '/admin/events';
+export const BACKOFFICE_EVENTS_EDIT = '/admin/events/edit/:id';
