@@ -194,31 +194,20 @@ class MongoDBDatabase {
 
     return await Promise.all(promises);
   };
-/*
-  private getRandomPostsAsArrayOfIds(nPosts: number) {
-    const tempPosts = JSON.parse(JSON.stringify(this.posts)) as Array<IPost>;
+
+  private getRandomEventsArray(nEvents: number) {
+    const tempEvents = JSON.parse(JSON.stringify(this.events)) as Array<IEvent>;
     const arrayOfIds = [];
-    while (arrayOfIds.length < nPosts) {
-      const removedPost = tempPosts.splice(
-        Math.floor(Math.random() * nPosts),
+    while (arrayOfIds.length < nEvents) {
+      const removedEvent = tempEvents.splice(
+        Math.floor(Math.random() * nEvents),
         1,
       )[0];
-      arrayOfIds.push(removedPost._id);
+      arrayOfIds.push(removedEvent._id);
     }
     return arrayOfIds;
 	}
-	*/
-	private getRandomEvents = () => {
-		for (let i = 0; i<10; i++){
-			let event: IEvent = null;
-			if (this.events && this.events.length > 0) {
-				event = this.events[
-					Math.floor(Math.random() * this.users.length)
-				];
-			}
-			return event;
-		}
-  };
+	
 
 	private getRandomUser = () => {
     let user: IUser = null;
@@ -361,7 +350,7 @@ class MongoDBDatabase {
 		
 	) => {
 		const agendaDetail = {
-			storedEvents: this.getRandomEvents(),
+			storedEvents: this.getRandomEventsArray(5),
 			_userId: this.getRandomUser()._id,
 		}
 		const agenda: IAgenda = new Agenda(agendaDetail)
@@ -375,6 +364,18 @@ class MongoDBDatabase {
 			this.logger.error(`An error occurred when creating an agenda ${err}!`, {err});
 		}
 	};
+
+  private createAgendas = async () => {
+    const promises = [];
+
+    for (let i = 0; i < 1; i++) {
+      promises.push(
+        this.agendaCreate(),
+      );
+    }
+
+    return await Promise.all(promises);
+  };
 	// Alle seeders aanspreken indien nodig.
 
 
@@ -387,7 +388,6 @@ class MongoDBDatabase {
         }
         return User.find().exec();
       });
-
     this.categories = await Category.estimatedDocumentCount()
       .exec()
       .then(async count => {
@@ -402,18 +402,20 @@ class MongoDBDatabase {
 			}
 			return Venue.find().exec()	
 		});
+		
 		this.events = await Event.estimatedDocumentCount().exec().then(async (count) => {
 			if (count === 0) {
 				await this.createEvents();
 			}
 			return Event.find().exec()	
 		});
-		this.agendas = await Agenda.estimatedDocumentCount().exec().then(async (count) => {
+
+		/*this.agendas = await Agenda.estimatedDocumentCount().exec().then(async (count) => {
 			if (count === 0) {
-				await this.createAgenda();
+				await this.createAgendas();
 			}
 			return Event.find().exec()	
-		});
+		});*/
 		
 
   };

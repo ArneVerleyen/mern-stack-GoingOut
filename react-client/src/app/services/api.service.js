@@ -31,7 +31,7 @@ const ApiProvider = ({children}) => {
 
   const storeEvent = async (event) => {
     const options = {
-      method: "event",
+      method: "post",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -114,7 +114,7 @@ const ApiProvider = ({children}) => {
 
 	const storeVenue = async (venue) => {
 		const options = {
-			method: "venue",
+			method: "post",
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
@@ -167,7 +167,171 @@ const ApiProvider = ({children}) => {
 		const response = await fetch(`${BASE_URL}/venues/${id}?mode=${mode}`, options);
 		return await response.json();
 	}
+
+	/*
+	 * Api Categories
+	 */
+
+	const findAllCategories = async (query = null) => {
+		let url = `${BASE_URL}/categories`;
+		if (query !== null) {
+			url += (url.indexOf('?') === -1 ? '?' : '&') + queryParams(query);
+		}
+		const response = await fetch(url);
+		return response.json();
+	}
+
+	const findCategory = async (id) => {
+		let url = `${BASE_URL}/categories/${id}`;
+		const response = await fetch(url);
+		return response.json();
+	}
+
+	const createCategoryViewModel = async (category) => {
+		let url = `${BASE_URL}/categories/create`;
+		const response = await fetch(url);
+		return response.json();
+	}
+
+	const storeCategory = async (category) => {
+		const options = {
+			method: "post",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(category)
+		};
+
+		let url = `${BASE_URL}/categories`;
+		const response = await fetch(url, options);
+		return response.json();
+	}
+
+	const editCategoryViewModel = async (categoryId) => {
+		const options = {
+			method: "get",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+		};
+
+		let url = `${BASE_URL}/categories/${categoryId}/edit`;
+		const response = await fetch(url, options);
+		return response.json();
+	}
+
+	const updateCategory = async (category) => {
+		const options = {
+			method: "put",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(category)
+		};
+
+		let url = `${BASE_URL}/categories/${category._id}`;
+		const response = await fetch(url, options);
+		return response.json();
+	}
+
+	const deleteCategory = async (id, mode = 0) => {
+		const options = {
+			method: "delete",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+		}
+		const response = await fetch(`${BASE_URL}/categories/${id}?mode=${mode}`, options);
+		return await response.json();
+	}
 	
+	/*
+	 * Api services Users
+	 */
+
+	const findAllUsers = async (query = null) => {
+		let url = `${BASE_URL}/users`;
+		if (query !== null) {
+			url += (url.indexOf('?') === -1 ? '?' : '&') + queryParams(query);
+		}
+		const response = await fetch(url);
+		return response.json();
+	}
+
+	const findUser = async (id) => {
+		let url = `${BASE_URL}/users/${id}`;
+		const response = await fetch(url);
+		return response.json();
+	}
+
+	const createUserViewModel = async (user) => {
+		let url = `${BASE_URL}/users/create`;
+		const response = await fetch(url);
+		return response.json();
+	}
+
+	const storeUser = async (user) => {
+		const options = {
+			method: "post",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(user)
+		};
+
+		let url = `${BASE_URL}/users`;
+		const response = await fetch(url, options);
+		return response.json();
+	}
+
+	const editUserViewModel = async (userId) => {
+		const options = {
+			method: "get",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+		};
+
+		let url = `${BASE_URL}/users/${userId}/edit`;
+		const response = await fetch(url, options);
+		return response.json();
+	}
+
+	const updateUser = async (user) => {
+		const options = {
+			method: "put",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(user)
+		};
+
+		let url = `${BASE_URL}/users/${user._id}`;
+		const response = await fetch(url, options);
+		return response.json();
+	}
+
+	const deleteUser = async (id, mode = 0) => {
+		const options = {
+			method: "delete",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+		}
+		const response = await fetch(`${BASE_URL}/users/${id}?mode=${mode}`, options);
+		return await response.json();
+	}
+
+	
+
   const queryParams = (options) => {
     return Object.keys(options)
       .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(options[key])).join('&');
@@ -177,7 +341,10 @@ const ApiProvider = ({children}) => {
 		<ApiContext.Provider value={{ createEventViewModel, deleteEvent, findAllEvents,
 		 findEvent, storeEvent, editEventViewModel, updateEvent,
 			findAllVenues, findVenue, createVenueViewModel, updateVenue,
-			deleteVenue, editVenueViewModel, storeVenue }}>
+			deleteVenue, editVenueViewModel, storeVenue, findAllCategories, findCategory,
+			createCategoryViewModel, storeCategory, editCategoryViewModel, updateCategory, deleteCategory,
+			findAllUsers,findUser, createUserViewModel, storeUser, editUserViewModel,
+			updateUser, deleteUser  }}>
       {children}
     </ApiContext.Provider>
   );

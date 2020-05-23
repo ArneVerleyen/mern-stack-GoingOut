@@ -17,5 +17,20 @@ export const VENUE_DETAIL = '/venues/:id';
 
 export const BACKOFFICE_LANDING = '/admin/';
 export const BACKOFFICE_DASHBOARD = '/admin/dashboard';
+
 export const BACKOFFICE_EVENTS = '/admin/events';
-export const BACKOFFICE_EVENTS_EDIT = '/admin/events/edit/:id';
+export const BACKOFFICE_EVENTS_EDIT = '/admin/events/:id/edit';
+export const BACKOFFICE_EVENTS_CREATE = '/admin/events/create';
+
+export const BACKOFFICE_VENUES = '/admin/venues';
+export const BACKOFFICE_VENUES_EDIT = '/admin/venues/:id/edit';
+export const BACKOFFICE_VENUES_CREATE = '/admin/venues/create';
+
+export const BACKOFFICE_CATEGORIES = '/admin/categories';
+export const BACKOFFICE_CATEGORIES_EDIT = '/admin/categories/:id/edit';
+export const BACKOFFICE_CATEGORIES_CREATE = '/admin/categories/create';
+
+export const BACKOFFICE_USERS = '/admin/users';
+export const BACKOFFICE_USERS_EDIT = '/admin/users/:id/edit';
+export const BACKOFFICE_USERS_CREATE = '/admin/users/create';
+

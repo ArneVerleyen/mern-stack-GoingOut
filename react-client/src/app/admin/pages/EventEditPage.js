@@ -2,42 +2,42 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import * as Routes from '../../routes';
-import { PostEdit } from '../components';
+import { EventEdit } from '../components';
 import { useApi } from '../../services';
 import { useToast } from '../services';
 
-const PostEditPage = ({ children }) => {
+const EventEditPage = ({ children }) => {
   const { addToast } = useToast();
   const { id } = useParams();
-  const { editPostViewModel, updatePost } = useApi();
-  const [ postViewModel, setPostViewModel ] = useState(null);
+  const { editEventViewModel, updateEvent } = useApi();
+  const [ eventViewModel, setEventViewModel ] = useState(null);
 
   let history = useHistory();
 
   useEffect(() => {
-    const fetchPostViewModel = async () => {        
-      const data = await editPostViewModel(id);
-      setPostViewModel(data);
+    const fetchEventViewModel = async () => {        
+      const data = await editEventViewModel(id);
+      setEventViewModel(data);
     }
 
-    fetchPostViewModel();    
-  }, [editPostViewModel, id]);
+    fetchEventViewModel();    
+  }, [editEventViewModel, id]);
 
-  const handleOnUpdate = async (post) => {
-    const updatedPost = await updatePost(post);
+  const handleOnUpdate = async (event) => {
+    const updatedEvent = await updateEvent(event);
     addToast({
-      title: `Administration: Update Post`,
-      message: `Successfully updated an existing post with id: ${updatedPost._id} and title: ${updatedPost.title}`
+      title: `Administration: Update Event`,
+      message: `Successfully updated an existing event with id: ${updatedEvent._id} and title: ${updatedEvent.title}`
     });
-    history.push(Routes.BACKOFFICE_POSTS);
+    history.push(Routes.BACKOFFICE_EVENTS);
   }
   
   return (
     <div className="container">
       <div className="row">
-        <PostEdit className="col-12 col-sm-12 col-md-12 col-lg-12 ol-xl-6 post-edit" viewModel={postViewModel} onUpdate={handleOnUpdate} />
+        <EventEdit className="col-12 col-sm-12 col-md-12 col-lg-12 ol-xl-6 event-edit" viewModel={eventViewModel} onUpdate={handleOnUpdate} />
       </div>
     </div>
   )
 };
-export default PostEditPage;
+export default EventEditPage;

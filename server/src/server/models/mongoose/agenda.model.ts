@@ -8,7 +8,7 @@ interface IAgenda extends Document {
 	
 	_userId: IUser['_id'];
 	
-	storedEvents: Array<IEvent['_id']>;
+	_eventIds: Array<IEvent['_id']>;
 	slug: string;
 	
 
@@ -28,8 +28,8 @@ const agendaSchema: Schema = new Schema(
 			ref:'User',
 			required: true,
 		},
-		storedEvents: {
-			type: [Schema.Types.ObjectId],
+		_eventIds:{
+			type:[ Schema.Types.ObjectId],
 			ref: 'Event',
 			required: false,
 		},
@@ -62,7 +62,7 @@ agendaSchema.pre<IAgenda>('validate', function(next) {
 
 agendaSchema.virtual('event', {
   ref: 'Event',
-  localField: 'storedEvents',
+  localField: '_eventIds',
   foreignField: '_id',
   justOne: false,
 });

@@ -29,7 +29,7 @@ const EventCreatePage = ({ children }) => {
       title: `Administration: New Event`,
       message: `Successfully created a new event with id: ${storedEvent._id} and title: ${storedEvent.title}`
     });
-    history.push(Routes.BACKOFFICE_POSTS);
+    history.push(Routes.BACKOFFICE_EVENTS);
   }
   
   return (

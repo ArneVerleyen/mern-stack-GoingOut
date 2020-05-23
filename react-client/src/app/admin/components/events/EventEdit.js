@@ -88,9 +88,9 @@ const EventEdit = ({className, children, viewModel, onSave = null, onUpdate = nu
   
   return (
     <div className={classnames(className)}>
-      <div className="card shadow mb-4">
+			      <div className="card shadow mb-4">
         <div className="card-header py-3">
-  <h6 className="m-0 font-weight-bold text-primary">{!!viewModel && !!viewModel.event ? <Fragment>Update the event: {viewModel.event.title}</Fragment> : <Fragment>Create a new event</Fragment>}</h6>
+  				<h6 className="m-0 font-weight-bold text-primary">{!!viewModel && !!viewModel.event ? <Fragment>Update the event: {viewModel.event.title}</Fragment> : <Fragment>Create a new event</Fragment>}</h6>
         </div>
         <div className="card-body">
           <form onSubmit={handleSubmit}>
@@ -100,39 +100,39 @@ const EventEdit = ({className, children, viewModel, onSave = null, onUpdate = nu
             </div>
             <div className="form-group">
               <label htmlFor="txtDescription">Description</label>
-              <textarea className="form-control" id="txtDescription" name="txtDescription" rows="3" required value={eventForm['txtDescription']} onChange={handleInputChange} />
+              <textarea className="form-control" id="txtDescription" name="txtDescription" rows="10" required value={eventForm['txtDescription']} onChange={handleInputChange} />
             </div>
             <div className="form-group">
               <label htmlFor="txtLocation">Location</label>
-              <textarea className="form-control" id="txtLocation" name="txtLocation" rows="10" required value={eventForm['txtLocation']} onChange={handleInputChange} />
+              <textarea className="form-control" id="txtLocation" name="txtLocation" rows="3" required value={eventForm['txtLocation']} onChange={handleInputChange} />
             </div>
 						<div className="form-group">
               <label htmlFor="txtCity">City</label>
-              <textarea className="form-control" id="txtCity" name="txtCity" rows="10" required value={eventForm['txtCity']} onChange={handleInputChange} />
+              <textarea className="form-control" id="txtCity" name="txtCity" rows="3" required value={eventForm['txtCity']} onChange={handleInputChange} />
             </div>
 						<div className="form-group">
               <label htmlFor="txtStreet">Street</label>
-              <textarea className="form-control" id="txtStreet" name="txtStreet" rows="10" required value={eventForm['txtStreet']} onChange={handleInputChange} />
+              <textarea className="form-control" id="txtStreet" name="txtStreet" rows="3" required value={eventForm['txtStreet']} onChange={handleInputChange} />
             </div>
 						<div className="form-group">
               <label htmlFor="txtHouseNumber">HouseNumber</label>
-              <textarea className="form-control" id="txtHouseNumber" name="txtHouseNumber" rows="10" required value={eventForm['txtHouseNumber']} onChange={handleInputChange} />
+              <textarea className="form-control" id="txtHouseNumber" name="txtHouseNumber" rows="3" required value={eventForm['txtHouseNumber']} onChange={handleInputChange} />
             </div>
 						<div className="form-group">
               <label htmlFor="txtTags">Tags</label>
-              <textarea className="form-control" id="txtTags" name="txtTags" rows="10" required value={eventForm['txtTags']} onChange={handleInputChange} />
+              <textarea className="form-control" id="txtTags" name="txtTags" rows="3" required value={eventForm['txtTags']} onChange={handleInputChange} />
             </div>            <div className="form-group">
               <label htmlFor="txtPicture">Picture</label>
-              <textarea className="form-control" id="txtPicture" name="txtPicture" rows="10" required value={eventForm['txtPicture']} onChange={handleInputChange} />
+              <textarea className="form-control" id="txtPicture" name="txtPicture" rows="3" required value={eventForm['txtPicture']} onChange={handleInputChange} />
             </div>            <div className="form-group">
               <label htmlFor="txtDuration">Duration</label>
-              <textarea className="form-control" id="txtDuration" name="txtDuration" rows="10" required value={eventForm['txtDuration']} onChange={handleInputChange} />
+              <textarea className="form-control" id="txtDuration" name="txtDuration" rows="3" required value={eventForm['txtDuration']} onChange={handleInputChange} />
             </div>            <div className="form-group">
               <label htmlFor="txtPrice">Price</label>
-              <textarea className="form-control" id="txtPrice" name="txtPrice" rows="10" required value={eventForm['txtPrice']} onChange={handleInputChange} />
+              <textarea className="form-control" id="txtPrice" name="txtPrice" rows="3" required value={eventForm['txtPrice']} onChange={handleInputChange} />
             </div>            <div className="form-group">
               <label htmlFor="dateDate">Date</label>
-              <textarea className="form-control" id="dateDate" name="dateDate" rows="10" required value={eventForm['dateDate']} onChange={handleInputChange} />
+              <textarea className="form-control" id="dateDate" name="dateDate" rows="3" required value={eventForm['dateDate']} onChange={handleInputChange} />
             </div>
 
             <div className="form-group">
@@ -145,7 +145,7 @@ const EventEdit = ({className, children, viewModel, onSave = null, onUpdate = nu
             </div>
 
 						<div className="form-group">
-              <label htmlFor="ddlUser">Category</label>
+              <label htmlFor="ddlUser">User</label>
               <select className="form-control" id="ddlUser" name="ddlUser" onChange={handleSelectChange} value={eventForm['ddlUser']}>
                 {viewModel && viewModel.users && viewModel.users.map((user) => (
                   <option key={user._id} value={user._id}>{user.name}</option>
@@ -156,7 +156,7 @@ const EventEdit = ({className, children, viewModel, onSave = null, onUpdate = nu
 
 
  
-            <button type="submit" className="btn btn-primary">{!!viewModel && !!viewModel.event ? 'Update' : 'Save'} event</button>
+            <button type="submit"  className="btn btn-primary">{!!viewModel && !!viewModel.event ? 'Update' : 'Save'} event</button>
           </form>          
         </div>
       </div>

@@ -18,13 +18,13 @@ const Navigation = ({children, className}) => {
         <NavLink to={Routes.BACKOFFICE_EVENTS} activeClassName="active" className="sidebar-nav-link"><i className="fas fa-edit"></i><span>Events</span></NavLink>
       </li>
       <li className="sidebar-nav-item">        
-        <NavLink to={Routes.BACKOFFICE_EVENTS} activeClassName="active" className="sidebar-nav-link"><i className="fas fa-tags"></i><span>Categories</span></NavLink>
+        <NavLink to={Routes.BACKOFFICE_VENUES} activeClassName="active" className="sidebar-nav-link"><i className="fas fa-tags"></i><span>Venues</span></NavLink>
       </li>      
       <li className="sidebar-nav-item">        
         <NavLink to={Routes.BACKOFFICE_EVENTS} activeClassName="active" className="sidebar-nav-link"><i className="fas fa-comment-alt"></i><span>Messages</span></NavLink>
       </li>
       <li className="sidebar-nav-item">        
-        <NavLink to={Routes.BACKOFFICE_EVENTS} activeClassName="active" className="sidebar-nav-link"><i className="fas fa-users"></i><span>Users</span></NavLink>
+        <NavLink to={Routes.BACKOFFICE_USERS} activeClassName="active" className="sidebar-nav-link"><i className="fas fa-users"></i><span>Users</span></NavLink>
       </li>
       <li className="sidebar-nav-item">        
         <NavLink to={Routes.HOME} activeClassName="active" className="sidebar-nav-link"><i className="fas fa-home"></i><span>Home</span></NavLink>

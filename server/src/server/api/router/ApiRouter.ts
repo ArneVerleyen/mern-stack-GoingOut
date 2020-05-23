@@ -59,7 +59,8 @@ class ApiRouter {
      */
     this.router.get('/users', this.userController.index);
     this.router.get('/users/:id', this.userController.show);
-    this.router.delete('/users/:id', this.userController.destroy);
+		this.router.delete('/users/:id', this.userController.destroy);
+
     this.router.post('/auth/signin/', this.userController.signInLocal);
 		this.router.post('/auth/signup/', this.userController.signupLocal);
 		/*
@@ -70,8 +71,8 @@ class ApiRouter {
 		this.router.get('/events/:id', this.eventController.show);
 		this.router.post('/events', this.eventController.store);
 		this.router.get('/events/:id/edit', this.eventController.edit);
-		this.router.put('/events/:id/update', this.eventController.update);
-		this.router.delete('/events/:id/destroy', this.eventController.destroy);
+		this.router.put('/events/:id', this.eventController.update);
+		this.router.delete('/events/:id', this.eventController.destroy);
 
 		/*
 		 *	Venue routes
@@ -81,8 +82,8 @@ class ApiRouter {
 		this.router.get('/venues/:id', this.venueController.show);
 		this.router.post('/venues', this.venueController.store);
     this.router.get('/venues/:id/edit', this.venueController.edit);
-    this.router.put('/venues/:id/update', this.venueController.update);
-		this.router.delete('/venues/:id/destroy', this.venueController.destroy);
+    this.router.put('/venues/:id', this.venueController.update);
+		this.router.delete('/venues/:id', this.venueController.destroy);
 		
 		/*
 		 * Category Routes
@@ -93,8 +94,8 @@ class ApiRouter {
 		this.router.get('/categories/:id', this.categoryController.show);
 		this.router.post('/categories', this.categoryController.store);
     this.router.get('/categories/:id/edit', this.categoryController.edit);
-    this.router.put('/categories/:id/update', this.categoryController.update);
-		this.router.delete('/categories/:id/destroy', this.categoryController.destroy);
+    this.router.put('/categories/:id', this.categoryController.update);
+		this.router.delete('/categories/:id', this.categoryController.destroy);
 
 
   }
