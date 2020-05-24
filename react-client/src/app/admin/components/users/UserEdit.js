@@ -4,39 +4,23 @@ import classnames from 'classnames';
 
 const UserEdit = ({className, children, viewModel, onSave = null, onUpdate = null}) => {
   const [userForm, setUserForm] = useState({
-    txtTitle: '',
-    txtDescription: '',
-		txtLocation: '',
-		txtCity:'',
-		txtStreet:'',
-		txtHouseNumber:'',
-		txtTags:'',
-		txtPicture:'',
-		txtDuration:'',
-		txtPrice:'',
-		dateDate:'',
-		ddlCategory: '',
-		ddlUser:'',
-		ddlVenue:'',
+    txtEmail: '',
+    txtRole: '',
+		txtPassword: '',
+		txtFirstName:'',
+		txtLastName:'',
+		txtAvatar:'',
   });
 
   useEffect(() => {
     if (viewModel && viewModel.user) {
       setUserForm({
-        txtTitle: viewModel.user.title,
-        txtDescription: viewModel.user.description,
-				txtLocation: viewModel.user.location,
-				txtCity: viewModel.user.city,
-				txtStreet: viewModel.user.street,
-				txtHouseNumber: viewModel.user.houseNumber,
-				txtTags: viewModel.user.tags,
-				txtPicture: viewModel.user.picture,
-				txtDuration: viewModel.user.duration,
-				txtPrice: viewModel.user.price,
-				dateDate: viewModel.user.date,
-				ddlCategory: viewModel.user._categoryId,
-				ddlUser: viewModel.user._userId,
-				ddlVenue: viewModel.user._venueId,
+        txtEmail: viewModel.user.email,
+        txtRole: viewModel.user.role,
+				txtPassword: viewModel.user.loacalProvider.password,
+				txtFirstName: viewModel.user.profile.firstName,
+				txtLastName: viewModel.user.profile.lastName,
+				txtAvatar: viewModel.user.profile.avatar,
       });
     }
   }, [viewModel])
@@ -45,21 +29,12 @@ const UserEdit = ({className, children, viewModel, onSave = null, onUpdate = nul
     ev.pruserDefault();
 
     const user = {
-      title: userForm.txtTitle,
-      description: userForm.txtDescription,
-			location: userForm.txtLocation,
-			city: userForm.txtCity,
-			street: userForm.txtStreet,
-			houseNumber: userForm.txtHouseNumber,
-			tags: userForm.txtTags,
-			picture: userForm.txtPicture,
-			duration: userForm.txtDuration,
-			price: userForm.txtPrice,
-			date: userForm.dateDate,
-			_categoryId: userForm.ddlCategory,
-			_userId: userForm.ddlUser,
-			_venueId: userForm.ddlVenue,
-      
+			email: userForm.txtEmail,
+			role: userForm.txtRole,
+			password: userForm.txtPassword,
+			firstName: userForm.txtFirstName,
+			lastName: userForm.txtLastName,
+			txtAvatar: userForm.txtAvatar,
     };
 
     if (viewModel.user) {
@@ -95,67 +70,29 @@ const UserEdit = ({className, children, viewModel, onSave = null, onUpdate = nul
         <div className="card-body">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="txtTitle">Title</label>
-              <input type="text" className="form-control" id="txtTitle" name="txtTitle" required value={userForm['txtTitle']} onChange={handleInputChange}/>
+              <label htmlFor="txtEmail">E-mail</label>
+              <input type="text" className="form-control" id="txtEmail" name="txtEmail" rows="1" required value={userForm['txtEmail']} onChange={handleInputChange}/>
             </div>
             <div className="form-group">
-              <label htmlFor="txtDescription">Description</label>
-              <textarea className="form-control" id="txtDescription" name="txtDescription" rows="10" required value={userForm['txtDescription']} onChange={handleInputChange} />
+              <label htmlFor="txtRole">Role</label>
+              <textarea className="form-control" id="txtRole" name="txtRole" rows="1" required value={userForm['txtRole']} onChange={handleInputChange} />
             </div>
             <div className="form-group">
-              <label htmlFor="txtLocation">Location</label>
-              <textarea className="form-control" id="txtLocation" name="txtLocation" rows="3" required value={userForm['txtLocation']} onChange={handleInputChange} />
+              <label htmlFor="txtPassword">Password</label>
+              <textarea className="form-control" id="txtPassword" name="txtPassword" rows="1" required value={userForm['txtPassword']} onChange={handleInputChange} />
             </div>
 						<div className="form-group">
-              <label htmlFor="txtCity">City</label>
-              <textarea className="form-control" id="txtCity" name="txtCity" rows="3" required value={userForm['txtCity']} onChange={handleInputChange} />
+              <label htmlFor="txtFirstName">First name</label>
+              <textarea className="form-control" id="txtFirstName" name="txtFirstName" rows="1" required value={userForm['txtFirstName']} onChange={handleInputChange} />
             </div>
 						<div className="form-group">
-              <label htmlFor="txtStreet">Street</label>
-              <textarea className="form-control" id="txtStreet" name="txtStreet" rows="3" required value={userForm['txtStreet']} onChange={handleInputChange} />
+              <label htmlFor="txtLastName">Last name</label>
+              <textarea className="form-control" id="txtLastName" name="txtLastName" rows="1" required value={userForm['txtLastName']} onChange={handleInputChange} />
             </div>
 						<div className="form-group">
-              <label htmlFor="txtHouseNumber">HouseNumber</label>
-              <textarea className="form-control" id="txtHouseNumber" name="txtHouseNumber" rows="3" required value={userForm['txtHouseNumber']} onChange={handleInputChange} />
+              <label htmlFor="txtAvatar">Avatar</label>
+              <textarea className="form-control" id="txtAvatar" name="txtAvatar" rows="1" required value={userForm['txtAvatar']} onChange={handleInputChange} />
             </div>
-						<div className="form-group">
-              <label htmlFor="txtTags">Tags</label>
-              <textarea className="form-control" id="txtTags" name="txtTags" rows="3" required value={userForm['txtTags']} onChange={handleInputChange} />
-            </div>            <div className="form-group">
-              <label htmlFor="txtPicture">Picture</label>
-              <textarea className="form-control" id="txtPicture" name="txtPicture" rows="3" required value={userForm['txtPicture']} onChange={handleInputChange} />
-            </div>            <div className="form-group">
-              <label htmlFor="txtDuration">Duration</label>
-              <textarea className="form-control" id="txtDuration" name="txtDuration" rows="3" required value={userForm['txtDuration']} onChange={handleInputChange} />
-            </div>            <div className="form-group">
-              <label htmlFor="txtPrice">Price</label>
-              <textarea className="form-control" id="txtPrice" name="txtPrice" rows="3" required value={userForm['txtPrice']} onChange={handleInputChange} />
-            </div>            <div className="form-group">
-              <label htmlFor="dateDate">Date</label>
-              <textarea className="form-control" id="dateDate" name="dateDate" rows="3" required value={userForm['dateDate']} onChange={handleInputChange} />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="ddlCategory">Category</label>
-              <select className="form-control" id="ddlCategory" name="ddlCategory" onChange={handleSelectChange} value={userForm['ddlCategory']}>
-                {viewModel && viewModel.categories && viewModel.categories.map((category) => (
-                  <option key={category._id} value={category._id}>{category.name}</option>
-                ))}
-              </select>
-            </div>
-
-						<div className="form-group">
-              <label htmlFor="ddlUser">User</label>
-              <select className="form-control" id="ddlUser" name="ddlUser" onChange={handleSelectChange} value={userForm['ddlUser']}>
-                {viewModel && viewModel.users && viewModel.users.map((user) => (
-                  <option key={user._id} value={user._id}>{user.name}</option>
-                ))}
-              </select>
-            </div>
-
-
-
- 
             <button type="submit"  className="btn btn-primary">{!!viewModel && !!viewModel.user ? 'Update' : 'Save'} user</button>
           </form>          
         </div>

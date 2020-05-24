@@ -253,11 +253,9 @@ const ApiProvider = ({children}) => {
 	 * Api services Users
 	 */
 
-	const findAllUsers = async (query = null) => {
+	const findAllUsers = async () => {
 		let url = `${BASE_URL}/users`;
-		if (query !== null) {
-			url += (url.indexOf('?') === -1 ? '?' : '&') + queryParams(query);
-		}
+
 		const response = await fetch(url);
 		return response.json();
 	}
@@ -330,6 +328,87 @@ const ApiProvider = ({children}) => {
 		return await response.json();
 	}
 
+	/*
+	 * Online events API
+	 */
+
+	const findAllOnlineEvents = async (query = null) => {
+    let url = `${BASE_URL}/onlineevents`;
+    if (query !== null) {
+      url += (url.indexOf('?') === -1 ? '?' : '&') + queryParams(query);
+    }
+    const response = await fetch(url);
+    return response.json();
+  }
+
+  const findOnlineEvent = async (id) => {
+    let url = `${BASE_URL}/onlineevents/${id}`;
+    const response = await fetch(url);
+    return response.json();
+  }
+
+  const createOnlineEventViewModel = async (onlineEvent) => {
+    let url = `${BASE_URL}/onlineevents/create`;
+    const response = await fetch(url);
+    return response.json();
+  }
+
+  const storeOnlineEvent = async (onlineEvent) => {
+    const options = {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(onlineEvent)
+    };
+
+    let url = `${BASE_URL}/onlineevents`;
+    const response = await fetch(url, options);
+    return response.json();
+  }
+
+  const editOnlineEventViewModel = async (onlineEventId) => {
+    const options = {
+      method: "get",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    };
+
+    let url = `${BASE_URL}/onlineevents/${onlineEventId}/edit`;
+    const response = await fetch(url, options);
+    return response.json();
+  }
+
+  const updateOnlineEvent = async (onlineEvent) => {
+    const options = {
+      method: "put",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(onlineEvent)
+    };
+
+    let url = `${BASE_URL}/onlineevents/${onlineEvent._id}`;
+    const response = await fetch(url, options);
+    return response.json();
+  }
+
+  const deleteOnlineEvent = async (id, mode = 0) => {
+    const options = {
+      method: "delete",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    }
+    const response = await fetch(`${BASE_URL}/onlineevents/${id}?mode=${mode}`, options);
+    return await response.json();
+	}
+
 	
 
   const queryParams = (options) => {
@@ -344,7 +423,8 @@ const ApiProvider = ({children}) => {
 			deleteVenue, editVenueViewModel, storeVenue, findAllCategories, findCategory,
 			createCategoryViewModel, storeCategory, editCategoryViewModel, updateCategory, deleteCategory,
 			findAllUsers,findUser, createUserViewModel, storeUser, editUserViewModel,
-			updateUser, deleteUser  }}>
+			updateUser, deleteUser, findAllOnlineEvents, findOnlineEvent, createOnlineEventViewModel,
+			storeOnlineEvent, editOnlineEventViewModel, updateOnlineEvent, deleteOnlineEvent }}>
       {children}
     </ApiContext.Provider>
   );

@@ -1,0 +1,26 @@
+@import '../../app.scss';
+
+.onlineEvent-container{
+	padding: 60px;
+
+	.onlineEvent-deatail{
+		padding-right: 20px;
+	}
+	.onlineEvent-title{
+		font-family: $font-bookman;
+		color: $color-yellow;
+		font-size: 24px;
+	}
+	p{
+		font-family: $font-roboto;
+		font-size: 16px;
+		color: $color-orange;
+	}
+
+
+	.onlineEvent-img{
+		margin-top:30px;
+		max-width: 400px;
+		height:auto;
+	}
+}

@@ -1,4 +1,5 @@
 import { default as React, Fragment } from 'react';
+import { default as moment } from 'moment';
 
 import './eventDetail.scss';
 
@@ -15,6 +16,7 @@ const EventDetail = ({ event }) => {
 								<p>{event.location} {event.city}</p>
 								<p>{event.street} {event.houseNumber}</p>
 								<p>{event.tags}</p>
+								<p>{moment(event.date).format('DD/MM/YYYY')}</p>
 								
 							</article>
 

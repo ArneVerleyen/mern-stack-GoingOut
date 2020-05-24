@@ -9,6 +9,10 @@ export const EVENT_DETAIL = '/events/:id';
 export const EVENT_PAGE = '/events';
 export const EVENT_ALL = '/events/all';
 
+export const ONLINE_EVENT_DETAIL = '/onlineevents/:id';
+export const ONLINE_EVENT_PAGE = '/onlineevents';
+
+
 export const VENUE_PAGE = '/venues';
 export const VENUE_DETAIL = '/venues/:id';
 // export const EVENT_PAGE_PAGED = '/events/paged';
@@ -33,4 +37,8 @@ export const BACKOFFICE_CATEGORIES_CREATE = '/admin/categories/create';
 export const BACKOFFICE_USERS = '/admin/users';
 export const BACKOFFICE_USERS_EDIT = '/admin/users/:id/edit';
 export const BACKOFFICE_USERS_CREATE = '/admin/users/create';
+
+export const BACKOFFICE_ONLINE_EVENTS = '/admin/onlineevents';
+export const BACKOFFICE_ONLINE_EVENTS_EDIT = '/admin/onlineevents/:id/edit';
+export const BACKOFFICE_ONLINE_EVENTS_CREATE = '/admin/onlineevents/create';
 

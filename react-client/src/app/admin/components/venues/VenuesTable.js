@@ -20,7 +20,7 @@ const VenuesTable = ({children, venues, onDelete, onEdit}) => {
     <table className="table">
       <thead>
         <tr>
-          <th></th>
+          
           <th>Title</th>
           <th>Synopsis</th>
           <th>Created</th>
@@ -32,9 +32,7 @@ const VenuesTable = ({children, venues, onDelete, onEdit}) => {
           <tr
             key={venue.id}
           >
-            <td>
-              CHKB
-            </td>
+           
             <td>{venue.name}</td>
             <td>{venue.description}</td>
             <td>

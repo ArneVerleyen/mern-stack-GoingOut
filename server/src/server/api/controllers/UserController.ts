@@ -44,8 +44,8 @@ class UserController {
     try {
       const { id } = req.params;
 
-      const post = await User.findById(id).exec();
-      return res.status(200).json(post);
+      const user = await User.findById(id).exec();
+      return res.status(200).json(user);
     } catch (err) {
       next(err);
     }
@@ -145,6 +145,67 @@ class UserController {
         });
       },
     )(req, res, next);
+	};
+	
+	edit = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+
+    try {
+      const user = await User.findById(id).exec();
+
+      if (!user) {
+        throw new NotFoundError();
+      } else {
+        const vm = {
+          user,
+        };
+        return res.status(200).json(vm);
+      }
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  update = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+
+    try {
+      const userUpdate = {
+        email: req.body.email,
+				firstName: req.body.profile.firstName,
+				lastName: req.body.profile.lastName,
+				role: req.body.role,
+				password: req.body.localProvider.password,
+				avatar: req.body.profile.avatar,
+      };
+      const user = await User.findOneAndUpdate({ _id: id }, userUpdate, {
+        new: true,
+      }).exec();
+
+      if (!user) {
+        throw new NotFoundError();
+      }
+      return res.status(200).json(user);
+    } catch (err) {
+      next(err);
+    }
+	};
+	
+	store = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userCreate = new User({
+        email: req.body.email,
+				firstName: req.body.profile.firstName,
+				lastName: req.body.profile.lastName,
+				role: req.body.role,
+				password: req.body.localProvider.password,
+				avatar: req.body.profile.avatar,
+      });
+      const user = await userCreate.save();
+      return res.status(201).json(user);
+    } catch (err) {
+      next(err);
+    }
   };
 }
 

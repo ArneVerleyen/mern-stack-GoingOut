@@ -1,22 +1,19 @@
 import mongoose, { Schema, Document, PaginateModel } from 'mongoose';
 import { default as mongoosePaginate } from 'mongoose-paginate';
-import { default as slug } from 'slug';
+
 import { IUser } from './user.model';
 import { IEvent } from './event.model';
 
 interface IAgenda extends Document {
 	
 	_userId: IUser['_id'];
-	
-	_eventIds: Array<IEvent['_id']>;
-	slug: string;
-	
+	_eventIds: Array<IEvent['_id']>;	
 
   _createdAt: number;
   _modifiedAt: number;
   _deletedAt: number;
 
-  slugify(): void;
+
 }
 
 interface IAgendaModel extends PaginateModel<IAgenda> {}
@@ -33,12 +30,7 @@ const agendaSchema: Schema = new Schema(
 			ref: 'Event',
 			required: false,
 		},
-		slug: {
-			type: String,
-			required: true,
-			lowercase: true,
-			unique: false,
-		},
+		
     _createdAt: { type: Number, required: true, default: Date.now() },
     _modifiedAt: { type: Number, required: false, default: null },
     _deletedAt: { type: Number, required: false, default: null },
@@ -49,17 +41,12 @@ const agendaSchema: Schema = new Schema(
   },
 );
 
-agendaSchema.methods.slugify = function() {
-  this.slug = slug(this.name);
-};
-
-agendaSchema.pre<IAgenda>('validate', function(next) {
-  if (!this.slug) {
-    this.slugify();
-  }
-  return next();
+agendaSchema.virtual('user', {
+  ref: 'User',
+  localField: '_userId',
+  foreignField: '_id',
+  justOne: false,
 });
-
 agendaSchema.virtual('event', {
   ref: 'Event',
   localField: '_eventIds',
@@ -67,6 +54,7 @@ agendaSchema.virtual('event', {
   justOne: false,
 });
 
+agendaSchema.plugin(mongoosePaginate);
 const Agenda = mongoose.model<IAgenda, IAgendaModel>(
   'Agenda',
   agendaSchema,

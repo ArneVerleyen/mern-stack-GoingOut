@@ -19,7 +19,7 @@ const Navigation = ({children, state}) => {
 			<div className="nav-item-container">
 				<Link className="nav-item hidden" to={Routes.LANDING}>Home</Link>
 				<Link className="nav-item hidden" to={Routes.EVENT_PAGE}>Events</Link>
-				<Link className="nav-item hidden" >In de buurt</Link>
+				<Link className="nav-item hidden" to={Routes.ONLINE_EVENT_PAGE} >Online Events</Link>
 				<Link className="nav-item hidden" >Agenda</Link>
 				<Link className="nav-item hidden" to={Routes.VENUE_PAGE} >Locaties</Link>
 				<Link className="nav-item hidden" >Organiseren</Link>

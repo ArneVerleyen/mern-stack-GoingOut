@@ -4,3 +4,4 @@ export * from './toast';
 export * from './toolbar';
 export * from './venues';
 export * from  './users';
+export * from './onlineEvents';

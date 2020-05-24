@@ -20,7 +20,7 @@ const UsersTable = ({children, users, onDelete, onEdit}) => {
     <table className="table">
       <thead>
         <tr>
-          <th></th>
+          
           <th>e-mail</th>
           <th>profile</th>
           <th>Created</th>
@@ -30,11 +30,10 @@ const UsersTable = ({children, users, onDelete, onEdit}) => {
       <tbody>
         {users && users.map(user => (
           <tr
-            key={user.id}
+						key={user._id}
+						
           >
-            <td>
-              CHKB
-            </td>
+            
             <td>{user.email}</td>
             <td>{user.profile.firstName+' '+user.profile.lastName}</td>
             <td>

@@ -13,7 +13,9 @@ import {
 	IVenue,
 	Venue,
 	IAgenda,
-	Agenda
+	Agenda,
+	IOnlineEvent,
+	OnlineEvent
 } from '../../models/mongoose';
 
 class MongoDBDatabase {
@@ -21,11 +23,10 @@ class MongoDBDatabase {
   private logger: ILogger;
   private db: Connection;
 
-
+	// seeders 
   private categories: Array<ICategory>;
 	private users: Array<IUser>;
-	
-	// eigen seeders
+	private onlineEvents: Array<IOnlineEvent>;
 	private events: Array <IEvent>;
 	private venues: Array <IVenue>;
 	private agendas: Array<IAgenda>;
@@ -35,16 +36,13 @@ class MongoDBDatabase {
     this.logger = logger;
     this.config = config;
 
-
+		// arrays aanmaken
     this.categories = [];
-
 		this.users = [];
-		
-		// eigen arrays
+		this.onlineEvents = [];
 		this.venues = [];
 		this.events = [];
 		this.agendas = [];
-
   }
 
   public connect(): Promise<any> {
@@ -237,7 +235,6 @@ class MongoDBDatabase {
 		street: string,
 		houseNumber: number,
 		tags: string,
-		category: string,
 		picture: string,
 		duration: number,
 		price: number,
@@ -253,7 +250,6 @@ class MongoDBDatabase {
 				street,
 				houseNumber,
 				tags,
-				category,
 				picture,
 				duration,
 				price,
@@ -287,11 +283,11 @@ class MongoDBDatabase {
 					faker.address.streetName(),
 					faker.random.number(1000),
 					faker.random.words(),
-					'Music',
 					faker.random.image(),
 					faker.random.number(1000),
-					faker.random.number(1000),
 					Date.now(),
+					Date.now(),
+				
 			));
 		}
 
@@ -346,11 +342,9 @@ class MongoDBDatabase {
 	};
 
 	private agendaCreate = async (
-		
-		
 	) => {
 		const agendaDetail = {
-			storedEvents: this.getRandomEventsArray(5),
+			_eventIds: this.getRandomEventsArray(5),
 			_userId: this.getRandomUser()._id,
 		}
 		const agenda: IAgenda = new Agenda(agendaDetail)
@@ -368,14 +362,69 @@ class MongoDBDatabase {
   private createAgendas = async () => {
     const promises = [];
 
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 5; i++) {
       promises.push(
         this.agendaCreate(),
       );
     }
 
     return await Promise.all(promises);
-  };
+	};
+	
+	private onlineEventCreate = async (
+		title: string,
+		description: string,
+		tags: string,
+		picture: string,
+		duration: number,
+		date: number,
+		link: string,
+		
+	
+		) => {
+			const onlineEventDetail = {
+				title,
+				description,
+				tags,
+				picture,
+				duration,
+				date,
+				link,
+				_userId: this.getRandomUser()._id,
+			};
+
+		const onlineEvent: IOnlineEvent = new OnlineEvent(onlineEventDetail);
+
+		try {
+			const createdOnlineEvent = await onlineEvent.save();
+			this.onlineEvents.push(createdOnlineEvent);
+
+			this.logger.info(`Online event created with id: ${createdOnlineEvent._id}.`, {});
+		} catch (err) {
+			this.logger.error(`An error occurred when creating an online event ${err}!`, {err});
+		}
+	};
+
+	private createOnlineEvents = async () => {
+		const promises = [];
+
+			for (let i = 0; i < 30; i++) {
+				promises.push(this.onlineEventCreate(
+					faker.lorem.word(),
+					faker.lorem.paragraph(1),
+					faker.lorem.words(5),
+					faker.random.image(),
+					faker.random.number(1000),
+					Date.now(),
+					faker.internet.url(),
+
+
+			));	
+		}
+
+		await Promise.all(promises)
+	};
+
 	// Alle seeders aanspreken indien nodig.
 
 
@@ -410,13 +459,22 @@ class MongoDBDatabase {
 			return Event.find().exec()	
 		});
 
-		/*this.agendas = await Agenda.estimatedDocumentCount().exec().then(async (count) => {
+		this.agendas = await Agenda.estimatedDocumentCount()
+			.exec()
+			.then(async (count) => {
 			if (count === 0) {
 				await this.createAgendas();
 			}
-			return Event.find().exec()	
-		});*/
-		
+			return Agenda.find().exec()	
+		});
+		this.onlineEvents = await OnlineEvent.estimatedDocumentCount()
+		.exec()
+		.then(async (count) => {
+		if (count === 0) {
+			await this.createOnlineEvents();
+		}
+		return OnlineEvent.find().exec()	
+		});
 
   };
 }

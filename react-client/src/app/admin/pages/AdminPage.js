@@ -12,6 +12,11 @@ import UserCreatePage from './UserCreatePage';
 import UserEditPage from './UserEditPage';
 import UsersPage from './UsersPage';
 
+import OnlineEventsPage from './OnlineEventsPage';
+import OnlineEventEditPage from './OnlineEventEditPage';
+import OnlineEventCreatePage from './OnlineEventCreatePage';
+
+
 
 const AdminPage = ({children}) => {
 	return(
@@ -22,6 +27,10 @@ const AdminPage = ({children}) => {
 			<Router exact path={Routes.BACKOFFICE_EVENTS} component={EventsPage}></Router>
 			<Router exact path={Routes.BACKOFFICE_EVENTS_EDIT} component={EventEditPage}></Router>
 			<Router exact path={Routes.BACKOFFICE_EVENTS_CREATE} component={EventCreatePage}></Router>
+
+			<Router exact path={Routes.BACKOFFICE_ONLINE_EVENTS} component={OnlineEventsPage}></Router>
+			<Router exact path={Routes.BACKOFFICE_ONLINE_EVENTS_EDIT} component={OnlineEventEditPage}></Router>
+			<Router exact path={Routes.BACKOFFICE_ONLINE_EVENTS_CREATE} component={OnlineEventCreatePage}></Router>
 
 			<Router exact path={Routes.BACKOFFICE_VENUES} component={VenuesPage}></Router>
 			<Router exact path={Routes.BACKOFFICE_VENUES_EDIT} component={VenueEditPage}></Router>

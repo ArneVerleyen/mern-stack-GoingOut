@@ -6,6 +6,8 @@ import { default as EventPage } from './EventPage';
 import { default as EventPagePaged } from './EventPagePaged';
 import { default as VenuePage } from './VenuePage';
 import { default as VenueDetailPage } from './VenueDetailPage';
+import { default as OnlineEventDetailPage } from './OnlineEventDetailPage';
+import { default as OnlineEventPagePaged } from './OnlineEventPagePaged';
 
 export {
 	HomePage,
@@ -16,4 +18,6 @@ export {
 	EventPagePaged,
 	VenuePage,
 	VenueDetailPage,
+	OnlineEventPagePaged,
+	OnlineEventDetailPage,
 }

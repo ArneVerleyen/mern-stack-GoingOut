@@ -10,45 +10,26 @@ import UsersTable from './UsersTable';
 
 import './UserList.scss';
 
-const UserList = ({children, className, limit = 10, skip = 1, onEdit}) => {  
+const UserList = ({children, className, onEdit}) => {  
   const { deleteUser, findAllUsers } = useApi();
   const { addToast } = useToast();
   const [ users, setUsers ] = useState();
-  const [ currentPageIndex, setCurrentPageIndex ] = useState(skip);
-  const [ pagination, setPagination ] = useState({
-    limit,
-    page: skip,
-    pages: 1,
-    total: 1
-  });
+
   const [ userToDelete, setUserToDelete ] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {        
-      const data = await findAllUsers({
-        limit: pagination.limit,
-        skip: currentPageIndex
-      });
-      setUsers(data.docs);
-      setPagination({ 
-        limit: data.limit, 
-        page: data.page, 
-        pages: data.pages, 
-        total: data.total 
-      });
-    }
+      const data = await findAllUsers();
+			setUsers(data);
+		}
+		
 
     if (userToDelete === null) {
       fetchUsers();
     }
     
-  }, [findAllUsers, currentPageIndex, userToDelete, pagination.limit]);
+  }, [findAllUsers, userToDelete,]); //currentPageIndex, pagination.limit]);
 
-  const handlePage = (ev, pageIndex) => {
-    ev.pruserDefault();
-
-    setCurrentPageIndex(pageIndex);
-  }
 
   const handleDelete = (userId, mode) => {
     setUserToDelete({
@@ -76,7 +57,7 @@ const UserList = ({children, className, limit = 10, skip = 1, onEdit}) => {
     if (typeof onEdit === 'function') {
       onEdit(userId);
     }
-  }
+	}
 
   return (
     <div className={className}>
@@ -90,17 +71,6 @@ const UserList = ({children, className, limit = 10, skip = 1, onEdit}) => {
           </div>          
         </div>
         <div className="card-footer">
-          <nav aria-label="Page navigation example">
-            <ul className="pagination justify-content-end">
-              {(pagination.page > 1) ? (<li className="page-item"><button className="page-link" onClick={ev => handlePage(ev, pagination.page - 1)}>Previous</button></li>) : ''}
-              {
-                Array(pagination.pages).fill(true).map((item, index) => (
-                  <li key={index} className={classnames('page-item', (pagination.page === index + 1) ? 'active' : '' )}><button className="page-link" onClick={ev => handlePage(ev, index + 1)}>{index + 1}</button></li>
-                ))
-              }
-              {(pagination.page !== pagination.pages) ? (<li className="page-item"><button className="page-link" onClick={ev => handlePage(ev, pagination.page + 1)}>Next</button></li>) : ''}                
-            </ul>
-          </nav>
         </div>
       </div>
       <div className="modal fade" id="confirmModal" tabIndex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">

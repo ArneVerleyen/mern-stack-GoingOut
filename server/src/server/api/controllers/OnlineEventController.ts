@@ -1,26 +1,26 @@
 import { NextFunction, Request, Response } from 'express';
-import { IEvent, Event } from '../../models/mongoose';
+import { IOnlineEvent, OnlineEvent } from '../../models/mongoose';
 
 import { NotFoundError } from '../../utilities';
 
-class EventController {
+class OnlineEventController {
   index = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { limit, skip } = req.query;
-      let events;
+      let onlineEvents;
 
       if (limit && skip) {
         const options = {
           limit: parseInt(limit, 10) || 10,
           page: parseInt(skip, 10) || 1,
 					sort: { _createdAt: -1 },
-					populate: ['category', 'user',],
+					populate: 'user',
 				
         };
-        events = await Event.paginate({}, options);
+        onlineEvents = await OnlineEvent.paginate({}, options);
       } else {
-				const options = [{path:'category'},{path: 'user'}]
-				events = await Event.find()
+				const options = {path: 'user'}
+				onlineEvents = await OnlineEvent.find()
 				
 					.populate(options)
 					
@@ -28,7 +28,7 @@ class EventController {
           .exec();
       }
 
-      return res.status(200).json(events);
+      return res.status(200).json(onlineEvents);
     } catch (err) {
       next(err);
     }
@@ -38,9 +38,9 @@ class EventController {
     try {
       const { id } = req.params;
 
-      const event = await Event.findById(id)
+      const onlineEvent = await OnlineEvent.findById(id)
         .exec();
-      return res.status(200).json(event);
+      return res.status(200).json(onlineEvent);
     } catch (err) {
       next(err);
     }
@@ -56,23 +56,18 @@ class EventController {
 
   store = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const eventCreate = new Event({
+      const onlineEventCreate = new OnlineEvent({
         title: req.body.title,
 				description: req.body.description,
-				location: req.body.location,
-				city: req.body.city,
-				street: req.body.street,
-				houseNumber: req.body.houseNumber,
 				tags: req.body.tags,
 				picture: req.body.picture,
 				duration: req.body.duration,
-				price: req.body.price,
+				link: req.body.link,
 				date: req.body.date,
 				_userId: req.body._userId,
-				_categoryId: req.body._categoryId,
       });
-      const event = await eventCreate.save();
-      return res.status(201).json(event);
+      const onlineEvent = await onlineEventCreate.save();
+      return res.status(201).json(onlineEvent);
     } catch (err) {
       next(err);
     }
@@ -82,13 +77,13 @@ class EventController {
     const { id } = req.params;
 
     try {
-      const event = await Event.findById(id).exec();
+      const onlineEvent = await OnlineEvent.findById(id).exec();
 
-      if (!event) {
+      if (!onlineEvent) {
         throw new NotFoundError();
       } else {
         const vm = {
-          event,
+          onlineEvent,
         };
         return res.status(200).json(vm);
       }
@@ -101,29 +96,24 @@ class EventController {
     const { id } = req.params;
 
     try {
-      const eventUpdate = {
+      const onlineEventUpdate = {
         title: req.body.title,
 				description: req.body.description,
-				location: req.body.location,
-				city: req.body.city,
-				street: req.body.street,
-				houseNumber: req.body.houseNumber,
 				tags: req.body.tags,
 				picture: req.body.picture,
 				duration: req.body.duration,
-				price: req.body.price,
+				link: req.body.link,
 				date: req.body.date,
 				_userId: req.body._userId,
-				_categoryId: req.body._categoryId,
       };
-      const event = await Event.findOneAndUpdate({ _id: id }, eventUpdate, {
+      const onlineEvent = await OnlineEvent.findOneAndUpdate({ _id: id }, onlineEventUpdate, {
         new: true,
       }).exec();
 
-      if (!event) {
+      if (!onlineEvent) {
         throw new NotFoundError();
       }
-      return res.status(200).json(event);
+      return res.status(200).json(onlineEvent);
     } catch (err) {
       next(err);
     }
@@ -133,35 +123,35 @@ class EventController {
     const { id } = req.params;
 
     try {
-      let event = null;
+      let onlineEvent = null;
 
       let { mode } = req.query;
 
       switch (mode) {
         case 'delete':
         default:
-          event = await Event.findOneAndRemove({ _id: id });
+          onlineEvent = await OnlineEvent.findOneAndRemove({ _id: id });
           break;
         case 'softdelete':
-          event = await Event.findByIdAndUpdate(
+          onlineEvent = await OnlineEvent.findByIdAndUpdate(
             { _id: id },
             { _deletedAt: Date.now() },
           );
           break;
         case 'softundelete':
-          event = await Event.findByIdAndUpdate(
+          onlineEvent = await OnlineEvent.findByIdAndUpdate(
             { _id: id },
             { _deletedAt: null },
           );
           break;
       }
 
-      if (!event) {
+      if (!onlineEvent) {
         throw new NotFoundError();
       } else {
         return res.status(200).json({
-          message: `Successful ${mode} the Venue with id: ${id}!`,
-          event,
+          message: `Successful ${mode} the online event with id: ${id}!`,
+          onlineEvent,
           mode,
         });
       }
@@ -171,39 +161,5 @@ class EventController {
   };
 }
 
-export default EventController;
+export default OnlineEventController;
 
-
-
-
-
-
-/*
-import { NextFunction, Request, Response } from 'express';
-
-import { IEvent, Event, eventSchema } from '../../models/mongoose';
-
-class EventController {
-	
-	index = async (req: Request, res: Response, next: NextFunction) => {
-		try {
-			const events = await Event.find().sort({ _createdAt: -1 }).exec();
-			return res.status(200).json(events);
-		} catch (err) {
-			next(err);
-		}
-	};
-
-	show = async (req: Request, res: Response, next: NextFunction) => {
-		try {
-			const { id } = req.params;
-
-			const event = await Event.findById(id);
-			res.status(200).json(event);
-		} catch (err) {
-			next(err);
-		}
-	};
-}
-
-export default EventController; */

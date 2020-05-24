@@ -14,15 +14,15 @@ const ContactPage = ({children}) => {
 			<h3>GSM: 0499 999 999</h3>
 			<h3>e-mail: goingout@gmail.com</h3>
 			<div className="row">
-				<img src={logoFacebook}></img>
+				<img src={logoFacebook} alt="facebook"></img>
 				<p>Facebook</p>
 			</div>
 			<div className="row">
-				<img src={logoInstagram}></img>
+				<img src={logoInstagram} alt="instagram"></img>
 				<p>Instagram</p>
 			</div>
 			<div className="row">
-				<img src={logoTwitter}></img>
+				<img src={logoTwitter} alt="twitter"></img>
 				<p>Twitter</p>
 			</div>
 		</div>

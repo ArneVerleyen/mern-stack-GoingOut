@@ -15,6 +15,10 @@ import {
 
 	VenuePage,
 	VenueDetailPage,
+
+	OnlineEventDetailPage,
+	OnlineEventPagePaged,
+
 } from './pages';
 
 // admin imports
@@ -32,6 +36,7 @@ import { ApiProvider } from './services';
 
 // Css import
 import '../app/app.scss';
+
 
 
 
@@ -53,6 +58,11 @@ function App() {
 						
 						<RouteWithLayout exact path = {Routes.VENUE_PAGE} component={VenuePage} layout={PageLayOut} />
 						<RouteWithLayout exact path = {Routes.VENUE_DETAIL} component={VenueDetailPage} layout={PageLayOut} />
+
+						<RouteWithLayout exact path = {Routes.ONLINE_EVENT_PAGE} component={OnlineEventPagePaged} layout={PageLayOut} />
+						<RouteWithLayout exact path = {Routes.ONLINE_EVENT_DETAIL} component={OnlineEventDetailPage} layout={PageLayOut} />
+
+
 
 						<RouteWithLayout path = {Routes.BACKOFFICE_LANDING} component={AdminPage} layout={BackofficeLayout} />
 					</Switch>

@@ -3,10 +3,11 @@ import { default as classnames } from 'classnames';
 import { useApi } from '../../services';
 import { default as moment } from 'moment';
 
-const EventListPaged = ({children, amount, onReadMore, className, paged, ...rest }) => {
-	const { findAllEvents } = useApi();
 
-	const [ events, setEvents ] = useState();
+const OnlineEventListPaged = ({children, amount, onReadMore, className, paged, ...rest }) => {
+	const { findAllOnlineEvents } = useApi();
+
+	const [ onlineEvents, setOnlineEvents ] = useState();
 
 	const [ pagination, setPagination ] = useState({
 		limit: paged.limit,
@@ -22,9 +23,9 @@ const EventListPaged = ({children, amount, onReadMore, className, paged, ...rest
 				limit: pagination.limit,
 				skip: currentPageIndex,
 			};
-      const fetchEvents = async () => {
-        const data = await findAllEvents(options);
-				setEvents(data.docs);
+      const fetchOnlineEvents = async () => {
+        const data = await findAllOnlineEvents(options);
+				setOnlineEvents(data.docs);
 				setPagination({
 					limit: data.limit,
 					page: data.page,
@@ -35,10 +36,10 @@ const EventListPaged = ({children, amount, onReadMore, className, paged, ...rest
 			}
 
 
-			fetchEvents();
+			fetchOnlineEvents();
 		
     },
-    [findAllEvents, currentPageIndex, pagination.limit,],
+    [findAllOnlineEvents, currentPageIndex, pagination.limit,],
   )
 
   useEffect(() => {
@@ -49,10 +50,10 @@ const EventListPaged = ({children, amount, onReadMore, className, paged, ...rest
     }
   }, [initFetch]);
   
-  const handleReadMore = (ev, eventId) => {
+  const handleReadMore = (ev, onlineEventId) => {
     ev.preventDefault();
     if (typeof onReadMore === 'function') {
-      onReadMore(eventId);
+      onReadMore(onlineEventId);
     }
 	};
 	
@@ -62,25 +63,25 @@ const EventListPaged = ({children, amount, onReadMore, className, paged, ...rest
 	}
 	
   return (
-    <div className={classnames('row event-list', className)}>
-      {events && events.map((event, index) => (
+    <div className={classnames('row onlineEvent-list', className)}>
+      {onlineEvents && onlineEvents.map((onlineEvent, index) => (
         <div className="col-sm-12 col-md-4 col-lg-3 outer-card" key={index}>
-          <article className="card" key={event._id}>
+          <article className="card" key={onlineEvent._id}>
             <picture className="card-img-top">
-              <img src={event.picture} alt={event.title} />
+              <img src={onlineEvent.picture} alt={onlineEvent.title} />
             </picture>
             <div className="card-body">
-							<p>{moment(event.date).format('DD/MM/YYYY')}</p>
-              <h5 className="card-title">{event.title}</h5>
-              <button href="#" className="card-btn" onClick={ev => handleReadMore(ev, event._id)}>Lees meer...</button>
+							<p>{moment(onlineEvent.date).format('DD/MM/YYYY')}</p>
+              <h5 className="card-title">{onlineEvent.title}</h5>
+              <button href="#" className="card-btn" onClick={ev => handleReadMore(ev, onlineEvent._id)}>Lees meer...</button>
             </div>
           </article>
         </div>
         
       ))}
-			{events && pagination.page < pagination.pages ? <button className="col-12 btn-next-page" onClick={ev => handleLoadMore(ev, pagination.page + 1)}>meer laden...</button> : ''}
+			{onlineEvents && pagination.page < pagination.pages ? <button className="col-12 btn-next-page" onClick={ev => handleLoadMore(ev, pagination.page + 1)}>meer laden...</button> : ''}
     </div>
   );
 };
 
-export default EventListPaged; 
+export default OnlineEventListPaged; 
