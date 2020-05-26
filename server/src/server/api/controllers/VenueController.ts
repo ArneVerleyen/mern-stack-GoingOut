@@ -42,7 +42,7 @@ class VenueController {
 
   create = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      return res.status(200).json();
+      return res.status(200);
     } catch (err) {
       next(err);
     }

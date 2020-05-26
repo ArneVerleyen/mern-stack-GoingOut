@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { IAgenda, Agenda } from '../../models/mongoose';
+import { IAgenda, Agenda, User } from '../../models/mongoose';
 
 import { NotFoundError } from '../../utilities';
 
@@ -47,8 +47,12 @@ class AgendaController {
   };
 
   create = async (req: Request, res: Response, next: NextFunction) => {
+
     try {
-      return res.status(200).json();
+			const vm = {
+				users: await User.find(),
+			}
+      return res.status(200).json(vm);
     } catch (err) {
       next(err);
     }

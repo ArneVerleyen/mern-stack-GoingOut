@@ -126,7 +126,7 @@ const eventSchema: Schema = new Schema (
 	{
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  },
+  }
 );
 
 eventSchema.methods.slugify = function () {

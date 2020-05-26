@@ -148,7 +148,7 @@ const EventEdit = ({className, children, viewModel, onSave = null, onUpdate = nu
               <label htmlFor="ddlUser">User</label>
               <select className="form-control" id="ddlUser" name="ddlUser" onChange={handleSelectChange} value={eventForm['ddlUser']}>
                 {viewModel && viewModel.users && viewModel.users.map((user) => (
-                  <option key={user._id} value={user._id}>{user.name}</option>
+                  <option key={user._id} value={user._id}>{user.profile.firstName} {user.profile.lastName}</option>
                 ))}
               </select>
             </div>

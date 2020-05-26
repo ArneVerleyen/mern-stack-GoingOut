@@ -48,6 +48,11 @@ CategorySchema.pre<ICategory>('validate', function(next) {
   return next();
 });
 
+CategorySchema.virtual('id').get(function(this: ICategory) {
+  return this._id;
+});
+
+
 CategorySchema.plugin(mongoosePaginate);
 const Category = mongoose.model<ICategory, ICategoryModel>(
   'Category',

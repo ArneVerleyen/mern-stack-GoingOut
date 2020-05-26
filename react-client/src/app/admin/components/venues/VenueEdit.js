@@ -28,7 +28,7 @@ const VenueEdit = ({className, children, viewModel, onSave = null, onUpdate = nu
   }, [viewModel])
 
   const handleSubmit = (ev) => {
-    ev.prvenueDefault();
+    ev.preventDefault();
 
     const venue = {
       name: venueForm.txtName,
@@ -37,8 +37,7 @@ const VenueEdit = ({className, children, viewModel, onSave = null, onUpdate = nu
 			city: venueForm.txtCity,
 			street: venueForm.txtStreet,
 			houseNumber: venueForm.txtHouseNumber,
-			picture: venueForm.txtPicture,
-      
+			picture: venueForm.txtPicture
     };
 
     if (viewModel.venue) {

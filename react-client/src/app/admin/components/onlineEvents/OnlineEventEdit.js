@@ -79,7 +79,7 @@ const OnlineEventEdit = ({className, children, viewModel, onSave = null, onUpdat
 										<form onSubmit={handleSubmit}>
 											<div className="form-group">
 												<label htmlFor="txtTitle">Title</label>
-												<input type="text" className="form-control" id="txtTitle" name="txtTitle" rows="1" required value={onlineEventForm['txtTitle']} onChange={handleInputChange}/>
+												<input type="text" className="form-control" id="txtTitle" name="txtTitle" row="1" required value={onlineEventForm['txtTitle']} onChange={handleInputChange}/>
 											</div>
 											<div className="form-group">
 												<label htmlFor="txtDescription">Description</label>
@@ -111,7 +111,7 @@ const OnlineEventEdit = ({className, children, viewModel, onSave = null, onUpdat
 												<label htmlFor="ddlUser">User</label>
 												<select className="form-control" id="ddlUser" name="ddlUser" onChange={handleSelectChange} value={onlineEventForm['ddlUser']}>
 													{viewModel && viewModel.users && viewModel.users.map((user) => (
-														<option key={user._id} value={user._id}>{user.name}</option>
+														<option key={user._id} value={user._id}>{user.profile.firstName} {user.profile.lastName}</option>
 													))}
 												</select>
 											</div>

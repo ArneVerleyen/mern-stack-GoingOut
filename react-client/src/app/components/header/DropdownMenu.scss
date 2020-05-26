@@ -3,6 +3,11 @@
 	display: none;
 }
 
+.auth-toggle {
+display: none;
+}
+
+
 
 @media screen and (max-width: 800px){
 
@@ -20,6 +25,13 @@
 			height: auto;
 		}
 	}
+	.button{
+		all: unset;
+		color: $color-white;
+		-webkit-text-fill-color: $color-white;
+		cursor: pointer;
+	}
+			
 
 	.dropdown-container{
 		display: block;
@@ -46,3 +58,4 @@
 		}
 	}
 }
+

@@ -15,10 +15,12 @@ const EventCreatePage = ({ children }) => {
   let history = useHistory();
 
   useEffect(() => {
-    const fetchEventViewModel = async () => {        
-      const data = await createEventViewModel();
+		
+		const fetchEventViewModel = async () => {        
+			const data = await createEventViewModel();
+			console.log(data);
       setEventViewModel(data);
-    }
+    };
 
     fetchEventViewModel();    
   }, [createEventViewModel]);

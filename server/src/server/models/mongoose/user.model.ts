@@ -31,7 +31,8 @@ interface IUser extends Document {
 
  
 
-  comparePassword(candidatePassword: String, cb: Function): void;
+	comparePassword(candidatePassword: String, cb: Function): void;
+
 }
 
 const userSchema: Schema = new Schema(

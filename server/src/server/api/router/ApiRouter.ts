@@ -58,17 +58,6 @@ class ApiRouter {
      * Hello routes
      */
     this.router.get('/hello', this.helloController.index);
-    /*
-     * Users routes
-     */
-    this.router.get('/users', this.userController.index);
-    this.router.get('/users/:id', this.userController.show);
-		this.router.delete('/users/:id', this.userController.destroy);
-		this.router.put('/users/:id/edit', this.userController.edit);
-		this.router.post('/users', this.userController.store);
-
-    this.router.post('/auth/signin/', this.userController.signInLocal);
-		this.router.post('/auth/signup/', this.userController.signupLocal);
 		/*
 		 *	Event routes
 		 */
@@ -126,7 +115,17 @@ class ApiRouter {
     this.router.get('/onlineevents/:id/edit', this.onlineEventController.edit);
     this.router.put('/onlineevents/:id', this.onlineEventController.update);
 		this.router.delete('/onlineevents/:id', this.onlineEventController.destroy);
+		/*
+     * Users routes
+     */
+    this.router.get('/users', this.userController.index);
+    this.router.get('/users/:id', this.userController.show);
+		this.router.delete('/users/:id', this.userController.destroy);
 
+		
+
+    this.router.post('/auth/signin/', this.userController.signInLocal);
+		this.router.post('/auth/signup/', this.userController.signupLocal);
 
   }
 }

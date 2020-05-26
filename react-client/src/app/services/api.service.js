@@ -24,14 +24,16 @@ const ApiProvider = ({children}) => {
   }
 
   const createEventViewModel = async (event) => {
+
     let url = `${BASE_URL}/events/create`;
-    const response = await fetch(url);
+		const response = await fetch(url);
+		console.log(response);
     return response.json();
   }
 
   const storeEvent = async (event) => {
     const options = {
-      method: "post",
+      method: "POST",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -46,7 +48,7 @@ const ApiProvider = ({children}) => {
 
   const editEventViewModel = async (eventId) => {
     const options = {
-      method: "get",
+      method: "GET",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { IEvent, Event } from '../../models/mongoose';
+import { IEvent, Event, Category, User, Venue } from '../../models/mongoose';
 
 import { NotFoundError } from '../../utilities';
 
@@ -48,7 +48,12 @@ class EventController {
 
   create = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      return res.status(200).json();
+			const vm = {
+				categories: await Category.find(),
+				users: await User.find(),
+				venues: await Venue.find(),
+			}
+      return res.status(200).json(vm);
     } catch (err) {
       next(err);
     }

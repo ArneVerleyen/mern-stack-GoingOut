@@ -115,8 +115,10 @@ class UserController {
       email: user.email,
       token: `${token}`,
       strategy: 'local',
-      role: user.role,
-      avatar: user.profile.avatar,
+      role: 'user',
+			avatar: user.profile.avatar,
+			firstName: user.profile.firstName,
+			lastName: user.profile.lastName,
     });
   };
 

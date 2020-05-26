@@ -64,6 +64,11 @@ const venueSchema : Schema = new Schema (
   },
 );
 
+venueSchema.virtual('id').get(function(this: IVenue) {
+  return this._id;
+});
+
+
 venueSchema.plugin(mongoosePaginate);
 const Venue = mongoose.model<IVenue, IVenueModel>('venue', venueSchema);
 

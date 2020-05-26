@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { IOnlineEvent, OnlineEvent } from '../../models/mongoose';
+import { IOnlineEvent, OnlineEvent, User } from '../../models/mongoose';
+
 
 import { NotFoundError } from '../../utilities';
 
@@ -48,7 +49,10 @@ class OnlineEventController {
 
   create = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      return res.status(200).json();
+			const vm = {
+				users: await User.find(),
+			}
+      return res.status(200).json(vm);
     } catch (err) {
       next(err);
     }

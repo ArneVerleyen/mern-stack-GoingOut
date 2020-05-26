@@ -6,7 +6,12 @@
 	justify-content: space-between;
 	
 }
-
+.button{
+	all: unset;
+	color: $color-white;
+	-webkit-text-fill-color: $color-white;
+	cursor: pointer;
+}
 .nav-logo{
 	padding: 20px;
 }
@@ -41,5 +46,17 @@
 		display: none;
 	}
 }
+.auth-toggle {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	color: white;
 
+	& > img {
+			height: 32px;
+			width: 32px;
+			border-radius: 50%;
+			object-fit: cover;
+	}
+}
 

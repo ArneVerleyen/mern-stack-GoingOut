@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
         if (!token) {
           throw new Error('Token is not present on localstorage!');
         }
-        const decoded = jwt.verify(token, 'gdm_nmd_mobdev2');
+        const decoded = jwt.verify(token, 'gdm-nmd');
         if (!decoded) {
           throw new Error('Couldn\'t decode the token!');
         }
@@ -60,12 +60,17 @@ const AuthProvider = ({ children }) => {
     return user;
   }
 
-  const signup = async (email, password) => {
+  const signup = async (email, password,firstName, lastName, avatar) => {
     let url = `${apiConfig.baseURL}/auth/signup`;
 
     const body = {
       email,
-      password
+			password,
+			profile: {
+				firstName,
+				lastName,
+				avatar
+			}
     };
 
     const options = {
