@@ -1,4 +1,4 @@
-import { default as React, useState, useEffect, useCallback } from 'react';
+import { default as React} from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import * as Routes from '../routes';
 import {
@@ -33,7 +33,7 @@ const HomePage = ({children}) => {
 				<EventListPaged paged={{limit: 8, skip:1}} onReadMore={handleEventReadMore} ></EventListPaged>
 				<Link className="page-title" to={Routes.VENUE_PAGE}>Locaties</Link>
 				<VenueList paged={{limit: 8, skip:1}}></VenueList>
-				<Link className='agenda-link'><img className="btn-agenda" src={buttonAgenda} alt="Agenda"></img></Link>
+				<Link to={Routes.AGENDA_PAGE} className='agenda-link'><img className="btn-agenda" src={buttonAgenda} alt="Agenda"></img></Link>
 
 				<Link className="page-title">Organiseren</Link>
 				<div className='icon-text-container'>
@@ -45,7 +45,7 @@ const HomePage = ({children}) => {
 					<img src={iconTicket} className='icon-ticket' alt='ticket'></img>
 				</div>
 
-				<Link className='account-link'><img className="btn-account" src={buttonAccount} alt="Agenda"></img></Link>
+				<Link to={Routes.AUTH_SIGN_UP} className='account-link'><img className="btn-account" src={buttonAccount} alt="Agenda"></img></Link>
 
 			</div>
 		</div>

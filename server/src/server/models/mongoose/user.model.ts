@@ -1,7 +1,6 @@
 import { default as mongoose, Schema, Document } from 'mongoose';
 import { default as bcrypt } from 'bcrypt';
 
-
 interface ILocalProvider {
   password: string;
 }
@@ -29,10 +28,7 @@ interface IUser extends Document {
   role: string;
   profile?: IProfile;
 
- 
-
-	comparePassword(candidatePassword: String, cb: Function): void;
-
+  comparePassword(candidatePassword: String, cb: Function): void;
 }
 
 const userSchema: Schema = new Schema(

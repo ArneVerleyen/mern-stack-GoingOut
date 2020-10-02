@@ -32,7 +32,7 @@ const Navigation = ({children, state}) => {
 				<Link className="nav-item hidden" to={Routes.ONLINE_EVENT_PAGE} >Online Events</Link>
 				<Link className="nav-item hidden" to={Routes.AGENDA_PAGE} >Agenda</Link>
 				<Link className="nav-item hidden" to={Routes.VENUE_PAGE} >Locaties</Link>
-				<Link className="nav-item hidden" >Organiseren</Link>
+				<Link className="nav-item hidden" to={Routes.AUTH_SIGN_IN} >Organiseren</Link>
 				<Link className="nav-item hidden" to={Routes.CONTACT} >Contact</Link>
 				<Link className="nav-item hidden" to={Routes.AUTH_SIGN_IN} >Login</Link>
 				{!!currentUser

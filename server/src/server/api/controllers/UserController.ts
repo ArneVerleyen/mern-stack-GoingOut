@@ -116,9 +116,9 @@ class UserController {
       token: `${token}`,
       strategy: 'local',
       role: 'user',
-			avatar: user.profile.avatar,
-			firstName: user.profile.firstName,
-			lastName: user.profile.lastName,
+      avatar: user.profile.avatar,
+      firstName: user.profile.firstName,
+      lastName: user.profile.lastName,
     });
   };
 
@@ -147,9 +147,9 @@ class UserController {
         });
       },
     )(req, res, next);
-	};
-	
-	edit = async (req: Request, res: Response, next: NextFunction) => {
+  };
+
+  edit = async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
 
     try {
@@ -174,11 +174,11 @@ class UserController {
     try {
       const userUpdate = {
         email: req.body.email,
-				firstName: req.body.profile.firstName,
-				lastName: req.body.profile.lastName,
-				role: req.body.role,
-				password: req.body.localProvider.password,
-				avatar: req.body.profile.avatar,
+        firstName: req.body.profile.firstName,
+        lastName: req.body.profile.lastName,
+        role: req.body.role,
+        password: req.body.localProvider.password,
+        avatar: req.body.profile.avatar,
       };
       const user = await User.findOneAndUpdate({ _id: id }, userUpdate, {
         new: true,
@@ -191,17 +191,17 @@ class UserController {
     } catch (err) {
       next(err);
     }
-	};
-	
-	store = async (req: Request, res: Response, next: NextFunction) => {
+  };
+
+  store = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userCreate = new User({
         email: req.body.email,
-				firstName: req.body.profile.firstName,
-				lastName: req.body.profile.lastName,
-				role: req.body.role,
-				password: req.body.localProvider.password,
-				avatar: req.body.profile.avatar,
+        firstName: req.body.profile.firstName,
+        lastName: req.body.profile.lastName,
+        role: req.body.role,
+        password: req.body.localProvider.password,
+        avatar: req.body.profile.avatar,
       });
       const user = await userCreate.save();
       return res.status(201).json(user);

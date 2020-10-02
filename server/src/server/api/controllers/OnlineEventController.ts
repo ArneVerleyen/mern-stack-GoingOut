@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { IOnlineEvent, OnlineEvent, User } from '../../models/mongoose';
 
-
 import { NotFoundError } from '../../utilities';
 
 class OnlineEventController {
@@ -14,17 +13,16 @@ class OnlineEventController {
         const options = {
           limit: parseInt(limit, 10) || 10,
           page: parseInt(skip, 10) || 1,
-					sort: { _createdAt: -1 },
-					populate: 'user',
-				
+          sort: { _createdAt: -1 },
+          populate: 'user',
         };
         onlineEvents = await OnlineEvent.paginate({}, options);
       } else {
-				const options = {path: 'user'}
-				onlineEvents = await OnlineEvent.find()
-				
-					.populate(options)
-					
+        const options = { path: 'user' };
+        onlineEvents = await OnlineEvent.find()
+
+          .populate(options)
+
           .sort({ _createdAt: -1 })
           .exec();
       }
@@ -39,8 +37,7 @@ class OnlineEventController {
     try {
       const { id } = req.params;
 
-      const onlineEvent = await OnlineEvent.findById(id)
-        .exec();
+      const onlineEvent = await OnlineEvent.findById(id).exec();
       return res.status(200).json(onlineEvent);
     } catch (err) {
       next(err);
@@ -49,9 +46,9 @@ class OnlineEventController {
 
   create = async (req: Request, res: Response, next: NextFunction) => {
     try {
-			const vm = {
-				users: await User.find(),
-			}
+      const vm = {
+        users: await User.find(),
+      };
       return res.status(200).json(vm);
     } catch (err) {
       next(err);
@@ -62,13 +59,13 @@ class OnlineEventController {
     try {
       const onlineEventCreate = new OnlineEvent({
         title: req.body.title,
-				description: req.body.description,
-				tags: req.body.tags,
-				picture: req.body.picture,
-				duration: req.body.duration,
-				link: req.body.link,
-				date: req.body.date,
-				_userId: req.body._userId,
+        description: req.body.description,
+        tags: req.body.tags,
+        picture: req.body.picture,
+        duration: req.body.duration,
+        link: req.body.link,
+        date: req.body.date,
+        _userId: req.body._userId,
       });
       const onlineEvent = await onlineEventCreate.save();
       return res.status(201).json(onlineEvent);
@@ -102,17 +99,21 @@ class OnlineEventController {
     try {
       const onlineEventUpdate = {
         title: req.body.title,
-				description: req.body.description,
-				tags: req.body.tags,
-				picture: req.body.picture,
-				duration: req.body.duration,
-				link: req.body.link,
-				date: req.body.date,
-				_userId: req.body._userId,
+        description: req.body.description,
+        tags: req.body.tags,
+        picture: req.body.picture,
+        duration: req.body.duration,
+        link: req.body.link,
+        date: req.body.date,
+        _userId: req.body._userId,
       };
-      const onlineEvent = await OnlineEvent.findOneAndUpdate({ _id: id }, onlineEventUpdate, {
-        new: true,
-      }).exec();
+      const onlineEvent = await OnlineEvent.findOneAndUpdate(
+        { _id: id },
+        onlineEventUpdate,
+        {
+          new: true,
+        },
+      ).exec();
 
       if (!onlineEvent) {
         throw new NotFoundError();
@@ -166,4 +167,3 @@ class OnlineEventController {
 }
 
 export default OnlineEventController;
-

@@ -13,17 +13,16 @@ class CategoryController {
         const options = {
           limit: parseInt(limit, 10) || 10,
           page: parseInt(skip, 10) || 1,
-					sort: { _createdAt: -1 },
-					populate: ['category', 'user',],
-				
+          sort: { _createdAt: -1 },
+          populate: ['category', 'user'],
         };
         categorys = await Category.paginate({}, options);
       } else {
-				const options = [{path:'category'},{path: 'user'}]
-				categorys = await Category.find()
-				
-					.populate(options)
-					
+        const options = [{ path: 'category' }, { path: 'user' }];
+        categorys = await Category.find()
+
+          .populate(options)
+
           .sort({ _createdAt: -1 })
           .exec();
       }
@@ -38,8 +37,7 @@ class CategoryController {
     try {
       const { id } = req.params;
 
-      const category = await Category.findById(id)
-        .exec();
+      const category = await Category.findById(id).exec();
       return res.status(200).json(category);
     } catch (err) {
       next(err);
@@ -58,18 +56,18 @@ class CategoryController {
     try {
       const categoryCreate = new Category({
         title: req.body.title,
-				description: req.body.description,
-				location: req.body.location,
-				city: req.body.city,
-				street: req.body.street,
-				houseNumber: req.body.houseNumber,
-				tags: req.body.tags,
-				category: req.body.category,
-				picture: req.body.picture,
-				duration: req.body.duration,
-				price: req.body.price,
-				date: req.body.date,
-				venue: req.body.venue, 
+        description: req.body.description,
+        location: req.body.location,
+        city: req.body.city,
+        street: req.body.street,
+        houseNumber: req.body.houseNumber,
+        tags: req.body.tags,
+        category: req.body.category,
+        picture: req.body.picture,
+        duration: req.body.duration,
+        price: req.body.price,
+        date: req.body.date,
+        venue: req.body.venue,
       });
       const category = await categoryCreate.save();
       return res.status(201).json(category);
@@ -103,22 +101,26 @@ class CategoryController {
     try {
       const categoryUpdate = {
         title: req.body.title,
-				description: req.body.description,
-				location: req.body.location,
-				city: req.body.city,
-				street: req.body.street,
-				houseNumber: req.body.houseNumber,
-				tags: req.body.tags,
-				category: req.body.category,
-				picture: req.body.picture,
-				duration: req.body.duration,
-				price: req.body.price,
-				date: req.body.date,
-				venue: req.body.venue, 
+        description: req.body.description,
+        location: req.body.location,
+        city: req.body.city,
+        street: req.body.street,
+        houseNumber: req.body.houseNumber,
+        tags: req.body.tags,
+        category: req.body.category,
+        picture: req.body.picture,
+        duration: req.body.duration,
+        price: req.body.price,
+        date: req.body.date,
+        venue: req.body.venue,
       };
-      const category = await Category.findOneAndUpdate({ _id: id }, categoryUpdate, {
-        new: true,
-      }).exec();
+      const category = await Category.findOneAndUpdate(
+        { _id: id },
+        categoryUpdate,
+        {
+          new: true,
+        },
+      ).exec();
 
       if (!category) {
         throw new NotFoundError();
@@ -172,4 +174,3 @@ class CategoryController {
 }
 
 export default CategoryController;
-

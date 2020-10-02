@@ -13,17 +13,16 @@ class AgendaController {
         const options = {
           limit: parseInt(limit, 10) || 10,
           page: parseInt(skip, 10) || 1,
-					sort: { _createdAt: -1 },
-					populate: ['event', 'user'],
-				
+          sort: { _createdAt: -1 },
+          populate: ['event', 'user'],
         };
         agendas = await Agenda.paginate({}, options);
       } else {
-				const options = [{path:'event'},{path: 'user'}]
-				agendas = await Agenda.find()
-				
-					.populate(options)
-					
+        const options = [{ path: 'event' }, { path: 'user' }];
+        agendas = await Agenda.find()
+
+          .populate(options)
+
           .sort({ _createdAt: -1 })
           .exec();
       }
@@ -38,8 +37,7 @@ class AgendaController {
     try {
       const { id } = req.params;
 
-      const agenda = await Agenda.findById(id)
-        .exec();
+      const agenda = await Agenda.findById(id).exec();
       return res.status(200).json(agenda);
     } catch (err) {
       next(err);
@@ -47,11 +45,10 @@ class AgendaController {
   };
 
   create = async (req: Request, res: Response, next: NextFunction) => {
-
     try {
-			const vm = {
-				users: await User.find(),
-			}
+      const vm = {
+        users: await User.find(),
+      };
       return res.status(200).json(vm);
     } catch (err) {
       next(err);
@@ -61,9 +58,8 @@ class AgendaController {
   store = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const agendaCreate = new Agenda({
-				_userId: req.body._userId,
-				_eventIds: req.body._eventIds,
-				
+        _userId: req.body._userId,
+        _eventIds: req.body._eventIds,
       });
       const agenda = await agendaCreate.save();
       return res.status(201).json(agenda);
@@ -96,8 +92,8 @@ class AgendaController {
 
     try {
       const agendaUpdate = {
-				_userId: req.body._userId,
-				_eventIds: req.body._eventIds,
+        _userId: req.body._userId,
+        _eventIds: req.body._eventIds,
       };
       const agenda = await Agenda.findOneAndUpdate({ _id: id }, agendaUpdate, {
         new: true,

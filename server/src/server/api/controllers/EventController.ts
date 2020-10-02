@@ -13,17 +13,16 @@ class EventController {
         const options = {
           limit: parseInt(limit, 10) || 10,
           page: parseInt(skip, 10) || 1,
-					sort: { _createdAt: -1 },
-					populate: ['category', 'user',],
-				
+          sort: { _createdAt: -1 },
+          populate: ['category', 'user'],
         };
         events = await Event.paginate({}, options);
       } else {
-				const options = [{path:'category'},{path: 'user'}]
-				events = await Event.find()
-				
-					.populate(options)
-					
+        const options = [{ path: 'category' }, { path: 'user' }];
+        events = await Event.find()
+
+          .populate(options)
+
           .sort({ _createdAt: -1 })
           .exec();
       }
@@ -38,8 +37,7 @@ class EventController {
     try {
       const { id } = req.params;
 
-      const event = await Event.findById(id)
-        .exec();
+      const event = await Event.findById(id).exec();
       return res.status(200).json(event);
     } catch (err) {
       next(err);
@@ -48,11 +46,11 @@ class EventController {
 
   create = async (req: Request, res: Response, next: NextFunction) => {
     try {
-			const vm = {
-				categories: await Category.find(),
-				users: await User.find(),
-				venues: await Venue.find(),
-			}
+      const vm = {
+        categories: await Category.find(),
+        users: await User.find(),
+        venues: await Venue.find(),
+      };
       return res.status(200).json(vm);
     } catch (err) {
       next(err);
@@ -63,18 +61,18 @@ class EventController {
     try {
       const eventCreate = new Event({
         title: req.body.title,
-				description: req.body.description,
-				location: req.body.location,
-				city: req.body.city,
-				street: req.body.street,
-				houseNumber: req.body.houseNumber,
-				tags: req.body.tags,
-				picture: req.body.picture,
-				duration: req.body.duration,
-				price: req.body.price,
-				date: req.body.date,
-				_userId: req.body._userId,
-				_categoryId: req.body._categoryId,
+        description: req.body.description,
+        location: req.body.location,
+        city: req.body.city,
+        street: req.body.street,
+        houseNumber: req.body.houseNumber,
+        tags: req.body.tags,
+        picture: req.body.picture,
+        duration: req.body.duration,
+        price: req.body.price,
+        date: req.body.date,
+        _userId: req.body._userId,
+        _categoryId: req.body._categoryId,
       });
       const event = await eventCreate.save();
       return res.status(201).json(event);
@@ -108,18 +106,18 @@ class EventController {
     try {
       const eventUpdate = {
         title: req.body.title,
-				description: req.body.description,
-				location: req.body.location,
-				city: req.body.city,
-				street: req.body.street,
-				houseNumber: req.body.houseNumber,
-				tags: req.body.tags,
-				picture: req.body.picture,
-				duration: req.body.duration,
-				price: req.body.price,
-				date: req.body.date,
-				_userId: req.body._userId,
-				_categoryId: req.body._categoryId,
+        description: req.body.description,
+        location: req.body.location,
+        city: req.body.city,
+        street: req.body.street,
+        houseNumber: req.body.houseNumber,
+        tags: req.body.tags,
+        picture: req.body.picture,
+        duration: req.body.duration,
+        price: req.body.price,
+        date: req.body.date,
+        _userId: req.body._userId,
+        _categoryId: req.body._categoryId,
       };
       const event = await Event.findOneAndUpdate({ _id: id }, eventUpdate, {
         new: true,
@@ -177,11 +175,6 @@ class EventController {
 }
 
 export default EventController;
-
-
-
-
-
 
 /*
 import { NextFunction, Request, Response } from 'express';

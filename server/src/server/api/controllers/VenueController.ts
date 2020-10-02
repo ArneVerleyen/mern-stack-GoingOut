@@ -32,8 +32,7 @@ class VenueController {
     try {
       const { id } = req.params;
 
-      const venue = await Venue.findById(id)
-        .exec();
+      const venue = await Venue.findById(id).exec();
       return res.status(200).json(venue);
     } catch (err) {
       next(err);
@@ -52,10 +51,10 @@ class VenueController {
     try {
       const venueCreate = new Venue({
         name: req.body.name,
-				description: req.body.description,
-				city: req.body.city,
-				street: req.body.street,
-				houseNumber: req.body.houseNumber,
+        description: req.body.description,
+        city: req.body.city,
+        street: req.body.street,
+        houseNumber: req.body.houseNumber,
       });
       const venue = await venueCreate.save();
       return res.status(201).json(venue);
@@ -89,10 +88,10 @@ class VenueController {
     try {
       const venueUpdate = {
         name: req.body.name,
-				description: req.body.description,
-				city: req.body.city,
-				street: req.body.street,
-				houseNumber: req.body.houseNumber,
+        description: req.body.description,
+        city: req.body.city,
+        street: req.body.street,
+        houseNumber: req.body.houseNumber,
       };
       const venue = await Venue.findOneAndUpdate({ _id: id }, venueUpdate, {
         new: true,
@@ -150,6 +149,3 @@ class VenueController {
 }
 
 export default VenueController;
-
-
-

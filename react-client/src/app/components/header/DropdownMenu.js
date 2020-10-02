@@ -30,7 +30,7 @@ const DropdownMenu = (props) => {
 						<Link className="nav-item-dropdown" to={Routes.ONLINE_EVENT_PAGE} >Online events</Link>
 						<Link className="nav-item-dropdown" to={Routes.AGENDA_PAGE} >Agenda</Link>
 						<Link className="nav-item-dropdown" to={Routes.VENUE_PAGE} >Locaties</Link>
-						<Link className="nav-item-dropdown" >Organiseren</Link>
+						<Link className="nav-item-dropdown" to={Routes.AUTH_SIGN_IN} >Organiseren</Link>
 						<Link className="nav-item-dropdown" to={Routes.CONTACT} >Contact</Link>
 						{!!currentUser
            ? (
