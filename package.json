@@ -2,7 +2,7 @@
   "name": "mern-stack",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "http://github.com/gdmgent-1920-mobdev2/MERN-stack",
+  "repository": "https://github.com/ArneVerleyen/mern-stack-GoingOut.git",
   "author": "drdynscript <drdynscript@gmail.com>",
   "license": "MIT",
   "devDependencies": {

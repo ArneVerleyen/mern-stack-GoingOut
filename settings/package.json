@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "MEN Boilerplate with TypeScript",
   "main": "index.js",
-  "repository": "https://github.com/gdmgent-1920-mobdev2/MERN-stack",
+  "repository": " https://github.com/ArneVerleyen/mern-stack-GoingOut.git",
   "author": "drdynscript",
   "license": "MIT",
   "dependencies": {
